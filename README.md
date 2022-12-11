@@ -1,5 +1,6 @@
 <div align="center">
-<h1>GonaCli</h1>
+<img width="120" src="http://47.104.180.148/gonacli/gonacli_logo.svg"/>
+<h1 style="margin: 0; padding: 0">GonaCli</h1>
 <p>Command Line of Golang bridge to Nodejs Addon</p>
 <a href="https://goreportcard.com/report/github.com/wenlng/gonacli"><img src="https://goreportcard.com/badge/github.com/wenlng/gonacli"/></a>
 <a href="https://godoc.org/github.com/wenlng/gonacli"><img src="https://godoc.org/github.com/wenlng/gonacli?status.svg"/></a>
