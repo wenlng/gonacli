@@ -1,4 +1,4 @@
-module node_addon_go
+module gonacli
 
 go 1.16
 
