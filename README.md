@@ -14,7 +14,7 @@
 > English | [中文](README_zh.md)
 
 <p>
-gonacli ...
+gonacli, It was first released on December 11, 2022, and the tool usage document is under preparation ...
 </p>
 
 <p> ⭐️ If it helps you, please give a star.</p>
