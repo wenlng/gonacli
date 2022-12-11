@@ -1,4 +1,4 @@
-module gonacli
+module github.com/wenlng/gonacli
 
 go 1.16
 
