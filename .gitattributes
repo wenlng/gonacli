@@ -1,0 +1,7 @@
+*.go linguist-language=Go
+*.c linguist-language=c
+*.cc linguist-language=cpp
+*.cxx linguist-language=cpp
+*.js linguist-language=JavaScript
+*.ts linguist-language=TypeScript
+go.sum linguist-generated

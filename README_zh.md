@@ -11,26 +11,24 @@
 
 <br/>
 
-> English | [中文](README_zh.md)
+> [English](README.md) | 中文
 
 <p>
 gonacli ...
 </p>
 
-<p> ⭐️ If it helps you, please give a star.</p>
+<p> ⭐️ 如果能帮助到你，记得随手给点一个star。</p>
 
 - Github：[https://github.com/wenlng/gonacli](https://github.com/wenlng/gonacli)
 
-<br/>
-
-## Installation of proxy go module in China
+## 中国Go模块代理
 - GoProxy https://github.com/goproxy/goproxy.cn
 - AliProxy： https://mirrors.aliyun.com/goproxy/
 - OfficialProxy： https://goproxy.io/
 - ChinaProxy：https://goproxy.cn
 - Other：https://gocenter.io
 
-## Set Proxy of GO 
+### 设置Go的代理
 - Window
 ```shell script
 $ set GOPROXY=https://goproxy.io,direct
@@ -47,13 +45,14 @@ $ echo "export GOPROXY=https://goproxy.cn,direct" >> ~/.profile
 $ source ~/.profile
 ```
 
-## Install
+## 安装
 ```
 $ go install github.com/wenlng/gonacli
 ```
+
 <br/>
 
-> Buy the author coffee: [http://witkeycode.com/sponsor](http://witkeycode.com/sponsor)
+> 请作者喝咖啡：[http://witkeycode.com/sponsor](http://witkeycode.com/sponsor)
 
 <br/>
 

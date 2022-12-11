@@ -1,0 +1,39 @@
+package cmd
+
+import (
+	"bytes"
+	"errors"
+	"fmt"
+	"node_addon_go/clog"
+	"node_addon_go/tools"
+	"os/exec"
+)
+
+func runCommand(path, name string, arg ...string) (msg string, err error) {
+	cmd := exec.Command(name, arg...)
+	var out bytes.Buffer
+	var stderr bytes.Buffer
+	cmd.Stdout = &out
+	cmd.Stderr = &stderr
+	cmd.Dir = path
+	err = cmd.Run()
+	clog.Info(cmd.Args)
+	if err != nil {
+		msg = fmt.Sprint(err) + ": " + stderr.String()
+		err = errors.New(msg)
+	}
+	//log.Println(out.String())
+	return
+}
+
+func RunCommand(path string, exec string) (msg string, err error) {
+	cmdName := "/bin/bash"
+	cmdArg := "-c"
+	if tools.IsWindowsOs() {
+		cmdName = "cmd"
+		cmdArg = "/C"
+	}
+
+	msg, err = runCommand(path, cmdName, cmdArg, exec)
+	return
+}
