@@ -10,7 +10,7 @@ const (
 	color_green
 	color_yellow
 	color_blue
-	color_magenta //洋红
+	color_magenta
 
 	info = "[INFO]"
 	trac = "[TRAC]"

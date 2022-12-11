@@ -1,7 +1,7 @@
 package async
 
 import (
-	"node_addon_go/config"
+	"github.com/wenlng/gonacli/config"
 )
 
 // 生成线程执行代码

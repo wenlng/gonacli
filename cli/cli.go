@@ -3,8 +3,8 @@ package cli
 import (
 	"flag"
 	"fmt"
+	"github.com/wenlng/gonacli/task"
 	"log"
-	"node_addon_go/task"
 	"os"
 )
 

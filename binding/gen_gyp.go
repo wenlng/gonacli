@@ -1,8 +1,8 @@
 package binding
 
 import (
-	"node_addon_go/config"
-	"node_addon_go/tools"
+	"github.com/wenlng/gonacli/config"
+	"github.com/wenlng/gonacli/tools"
 )
 
 func GenGypFile(cfgs config.Config, bindingName string) bool {

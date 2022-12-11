@@ -1,12 +1,12 @@
 package build
 
 import (
-	binding2 "node_addon_go/binding"
-	"node_addon_go/check"
-	"node_addon_go/clog"
-	"node_addon_go/config"
-	"node_addon_go/content"
-	"node_addon_go/tools"
+	"github.com/wenlng/gonacli/binding"
+	"github.com/wenlng/gonacli/check"
+	"github.com/wenlng/gonacli/clog"
+	"github.com/wenlng/gonacli/config"
+	"github.com/wenlng/gonacli/content"
+	"github.com/wenlng/gonacli/tools"
 	"path/filepath"
 )
 
@@ -46,22 +46,22 @@ func GenerateAddonBridge(cfgs config.Config) bool {
 	}
 
 	// 生成 node-gyp 编译配置文件
-	if y := binding2.GenGypFile(cfgs, bindingName); !y {
+	if y := binding.GenGypFile(cfgs, bindingName); !y {
 		done = false
 	}
 
 	// 生成 js call api to index.js
-	if i := binding2.GenJsCallIndexFile(cfgs, indexJsName); !i {
+	if i := binding.GenJsCallIndexFile(cfgs, indexJsName); !i {
 		done = false
 	}
 
 	// 生成 js call api to index.d.t
-	if t := binding2.GenJsCallDeclareIndexFile(cfgs, indexDTsName); !t {
+	if t := binding.GenJsCallDeclareIndexFile(cfgs, indexDTsName); !t {
 		done = false
 	}
 
 	// 生成 npm package 包模板文件
-	if p := binding2.GenPackageFile(cfgs, packageName); !p {
+	if p := binding.GenPackageFile(cfgs, packageName); !p {
 		done = false
 	}
 

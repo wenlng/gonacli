@@ -2,9 +2,9 @@ package check
 
 import (
 	"fmt"
-	"node_addon_go/clog"
-	"node_addon_go/config"
-	"node_addon_go/tools"
+	"github.com/wenlng/gonacli/clog"
+	"github.com/wenlng/gonacli/config"
+	"github.com/wenlng/gonacli/tools"
 )
 
 func CheckBaseConfig(config config.Config) error {

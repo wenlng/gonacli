@@ -1,9 +1,9 @@
 package resync
 
 import (
-	"node_addon_go/config"
-	args2 "node_addon_go/content/args/argsync"
-	"node_addon_go/tools"
+	"github.com/wenlng/gonacli/config"
+	args2 "github.com/wenlng/gonacli/content/args/argsync"
+	"github.com/wenlng/gonacli/tools"
 	"strings"
 )
 

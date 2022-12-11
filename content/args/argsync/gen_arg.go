@@ -2,8 +2,8 @@ package argsync
 
 import (
 	"fmt"
-	"node_addon_go/config"
-	"node_addon_go/content/validate"
+	"github.com/wenlng/gonacli/config"
+	"github.com/wenlng/gonacli/content/validate"
 )
 
 func GenArgCode(args []config.Arg) (string, []string, string) {

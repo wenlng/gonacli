@@ -2,8 +2,8 @@ package async
 
 import (
 	"fmt"
-	"node_addon_go/config"
-	"node_addon_go/content/args/argasync"
+	"github.com/wenlng/gonacli/config"
+	"github.com/wenlng/gonacli/content/args/argasync"
 )
 
 // 生成线程入口代码

@@ -1,6 +1,6 @@
 package main
 
-import "node_addon_go/cli"
+import "github.com/wenlng/gonacli/cli"
 
 func main() {
 	c := cli.CLI{}

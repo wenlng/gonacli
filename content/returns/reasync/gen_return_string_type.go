@@ -1,7 +1,7 @@
 package reasync
 
 import (
-	"node_addon_go/tools"
+	"github.com/wenlng/gonacli/tools"
 	"strings"
 )
 

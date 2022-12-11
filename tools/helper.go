@@ -10,10 +10,6 @@ import (
 	"unicode"
 )
 
-/**
- * @Description: 获取当前目录
- * @return string
- */
 func GetPWD() string {
 	path, err := os.Getwd()
 	if err != nil {
@@ -22,11 +18,6 @@ func GetPWD() string {
 	return path
 }
 
-/**
- * @Description: 确保目录存在
- * @param dir
- * @return err
- */
 func EnsureDir(dir string) (err error) {
 	if _, err = os.Stat(dir); os.IsNotExist(err) {
 		err = os.MkdirAll(dir, 0755)
@@ -45,7 +36,6 @@ func IsDir(path string) bool {
 	return s.IsDir()
 }
 
-// 判断所给路径是否为文件
 func IsFile(path string) bool {
 	return !IsDir(path)
 }
@@ -61,11 +51,6 @@ func Exists(path string) bool {
 	return true
 }
 
-/**
- * @Description: Write content to file
- * @param v
- * @param file
- */
 func WriteFile(content string, dirname string, filename string) {
 	_ = os.MkdirAll(dirname, 0777)
 	file := dirname + filename
@@ -83,17 +68,11 @@ func WriteFile(content string, dirname string, filename string) {
 	}
 }
 
-/**
-检测是否是64位操作系统
-*/
 func CheckOS64Unit() bool {
 	unit := 32 << (^uint(0) >> 63)
 	return unit >= 64
 }
 
-/**
-格式缩进
-*/
 func FormatCodeIndent(str string, indent int) string {
 	newStr := ""
 	for i := 0; i < indent; i++ {
@@ -104,9 +83,6 @@ func FormatCodeIndent(str string, indent int) string {
 	return newStr
 }
 
-/**
-格式缩进 - 换行
-*/
 func FormatCodeIndentLn(str string, indent int) string {
 	newStr := `
 `
@@ -118,7 +94,6 @@ func FormatCodeIndentLn(str string, indent int) string {
 	return newStr
 }
 
-// InSlice 判断字符串是否在 slice 中。
 func InSlice(items []string, item string) bool {
 	for _, eachItem := range items {
 		if eachItem == item {
@@ -154,7 +129,6 @@ func FormatDirPath(op string) string {
 	return GetPWD() + "/" + op
 }
 
-// 首字母小写
 func ToFirstLower(str string) string {
 	for i, v := range str {
 		return string(unicode.ToLower(v)) + str[i+1:]
@@ -162,7 +136,6 @@ func ToFirstLower(str string) string {
 	return str
 }
 
-// 首字母大写
 func ToFirstUpper(str string) string {
 	for i, v := range str {
 		return string(unicode.ToUpper(v)) + str[i+1:]
@@ -183,7 +156,6 @@ func ToFirstCharLower(s string) string {
 	return newStr
 }
 
-// 删除目录内容
 func RemoveDirContents(dir string) error {
 	d, err := os.Open(dir)
 	if err != nil {

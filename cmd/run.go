@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"node_addon_go/clog"
-	"node_addon_go/tools"
+	"github.com/wenlng/gonacli/clog"
+	"github.com/wenlng/gonacli/tools"
 	"os/exec"
 )
 

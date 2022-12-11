@@ -3,10 +3,10 @@ package task
 import (
 	"fmt"
 	"github.com/jinzhu/configor"
-	"node_addon_go/build"
-	"node_addon_go/clog"
-	"node_addon_go/config"
-	"node_addon_go/tools"
+	"github.com/wenlng/gonacli/build"
+	"github.com/wenlng/gonacli/clog"
+	"github.com/wenlng/gonacli/config"
+	"github.com/wenlng/gonacli/tools"
 	"path/filepath"
 	"strings"
 )

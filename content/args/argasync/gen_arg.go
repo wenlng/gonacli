@@ -2,8 +2,8 @@ package argasync
 
 import (
 	"fmt"
-	"node_addon_go/config"
-	"node_addon_go/content/validate"
+	"github.com/wenlng/gonacli/config"
+	"github.com/wenlng/gonacli/content/validate"
 )
 
 // 生成校验代码

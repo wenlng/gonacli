@@ -1,7 +1,7 @@
 package argasync
 
 import (
-	"node_addon_go/tools"
+	"github.com/wenlng/gonacli/tools"
 )
 
 func GenAsyncArrayBufferArgTypeCode(name string, index string) (string, string) {

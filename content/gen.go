@@ -1,11 +1,11 @@
 package content
 
 import (
-	"node_addon_go/config"
-	"node_addon_go/content/async"
-	"node_addon_go/content/base"
-	"node_addon_go/content/returns/resync"
-	"node_addon_go/tools"
+	"github.com/wenlng/gonacli/config"
+	"github.com/wenlng/gonacli/content/async"
+	"github.com/wenlng/gonacli/content/base"
+	"github.com/wenlng/gonacli/content/returns/resync"
+	"github.com/wenlng/gonacli/tools"
 )
 
 func GenCode(config config.Config, cppName string) bool {

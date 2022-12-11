@@ -2,9 +2,9 @@ package async
 
 import (
 	"fmt"
-	"node_addon_go/config"
-	"node_addon_go/content/returns/reasync"
-	"node_addon_go/tools"
+	"github.com/wenlng/gonacli/config"
+	"github.com/wenlng/gonacli/content/returns/reasync"
+	"github.com/wenlng/gonacli/tools"
 	"strings"
 )
 

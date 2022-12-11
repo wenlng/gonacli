@@ -1,11 +1,11 @@
 package build
 
 import (
-	"node_addon_go/check"
-	"node_addon_go/clog"
-	"node_addon_go/cmd"
-	"node_addon_go/config"
-	"node_addon_go/tools"
+	"github.com/wenlng/gonacli/check"
+	"github.com/wenlng/gonacli/clog"
+	"github.com/wenlng/gonacli/cmd"
+	"github.com/wenlng/gonacli/config"
+	"github.com/wenlng/gonacli/tools"
 	"path/filepath"
 )
 

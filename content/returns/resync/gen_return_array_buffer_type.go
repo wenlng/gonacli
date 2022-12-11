@@ -1,9 +1,9 @@
 package resync
 
 import (
-	"node_addon_go/config"
-	args2 "node_addon_go/content/args/argsync"
-	"node_addon_go/tools"
+	"github.com/wenlng/gonacli/config"
+	"github.com/wenlng/gonacli/content/args/argsync"
+	"github.com/wenlng/gonacli/tools"
 	"strings"
 )
 
@@ -31,7 +31,7 @@ func GenReturnArrayBufferTypeCode(export config.Export) string {
 Value _` + methodName + `(const CallbackInfo& wg_info) {`
 	code += tools.FormatCodeIndentLn(`Env wg_env = wg_info.Env();`, 2)
 
-	c, argNames, endCode := args2.GenArgCode(args)
+	c, argNames, endCode := argsync.GenArgCode(args)
 	code += c
 
 	code += GenHandleReturnArrayBufferCode(methodName, argNames, endCode)
