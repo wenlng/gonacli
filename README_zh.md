@@ -48,7 +48,7 @@ $ source ~/.profile
 
 ## 安装
 ```
-$ go install github.com/wenlng/gonacli
+$ 
 ```
 
 <br/>
