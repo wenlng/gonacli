@@ -1,0 +1,27 @@
+// This is binding js call api declare
+export declare function intSum32(x : number, y ?: number): number;
+export declare function intSum64(x : number, y : number): number;
+export declare function uintSum32(x : number, y : number): number;
+export declare function compareInt(x : number, y : number): boolean;
+export declare function floatSum(x : number, y : number): number;
+export declare function doubleSum(x : number, y ?: number): number;
+export declare function formatStr(s : string): string;
+export declare function emptyString(s : string): boolean;
+export declare function filterMap(obj : object): object;
+export declare function countMap(obj : object): number;
+export declare function isMapType(obj : object): boolean;
+export declare function filterSlice(s : Array<any>): Array<any>;
+export declare function countSlice(s : Array<any>): number;
+export declare function isSliceType(s : Array<any>): boolean;
+export declare function filterArrayBuffer(s : ArrayBuffer): ArrayBuffer;
+export declare function countArrayBuffer(s : ArrayBuffer): number;
+export declare function isArrayBuffer(s : ArrayBuffer): boolean;
+export declare function asyncCallbackSleep(s : number): boolean;
+export declare function asyncCallbackReStr(s : string, cb : any): string;
+export declare function asyncCallbackReUintSum32(x : number, y : number, cb : any): number;
+export declare function asyncCallbackReArr(s : Array<any>, cb : any): Array<any>;
+export declare function asyncCallbackReArrBuffer(s : ArrayBuffer, cb : any): ArrayBuffer;
+export declare function asyncCallbackReObject(s : object, cb : any): object;
+export declare function asyncCallbackReCount(s : string, cb : any): number;
+export declare function asyncCallbackReBool(s : string, cb : any): boolean;
+export declare function asyncCallbackMArg(str : string, cb : any, arrb ?: ArrayBuffer): boolean;

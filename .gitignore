@@ -14,9 +14,9 @@
 # Dependency directories (remove the comment below to include it)
 .idea/
 test/
-_addon/
-_example/addon
-_example/_addon
+_addon/build
+_example/addon/build
+_example/_addon/build
 .DS_Store
 .vscode
 *.suo
