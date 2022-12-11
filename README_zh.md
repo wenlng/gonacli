@@ -46,9 +46,16 @@ $ echo "export GOPROXY=https://goproxy.cn,direct" >> ~/.profile
 $ source ~/.profile
 ```
 
-## 安装
+## 使用 golang 安装
+在安装前需要确保系统配置了GOPATH环境变量
 ```
-$ 
+# .bash_profile
+export GOPATH="/Users/awen/go"
+# 配置 bin 目录，使用 golang 方式安装是必须的
+export PATH="$PATH:$GOPATH/bin"
+```
+```
+$ go install github.com/wenlng/gonacli
 ```
 
 <br/>
