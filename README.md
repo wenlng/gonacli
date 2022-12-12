@@ -40,7 +40,7 @@ export PATH="$PATH:$GOPATH:$GOPATH/bin"
 安装 gonacli 工具
 ``` shell script
 $ go install github.com/wenlng/gonacli
-$ gonacli --version
+$ gonacli version
 ```
 <br/>
 
