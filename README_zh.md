@@ -59,9 +59,10 @@ $ source ~/.profile
 export GOPATH="/Users/awen/go"
 # 配置 bin 目录，使用 golang 方式安装是必须的
 export PATH="$PATH:$GOPATH:$GOPATH/bin"
-``` shell script
+``` 
+
 安装 gonacli 工具
-```
+```shell script
 $ go install github.com/wenlng/gonacli
 $ gonacli --version
 ```
