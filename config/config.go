@@ -17,7 +17,6 @@ type Export struct {
 type Config struct {
 	Name    string   `env:"Name" required:"true" default:"addon"`
 	OutPut  string   `env:"OutPut" required:"true" default:"./addon/"`
-	Root    string   `env:"Root" required:"true" default:"./"`
 	Sources []string `env:"Sources" required:"true" default:""`
 	Target  string   `env:"Target" required:"true" default:"addon.cc"`
 	Exports []Export `env:"Exports" required:"true" default:""`

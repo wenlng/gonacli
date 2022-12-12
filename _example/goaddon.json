@@ -1,6 +1,5 @@
 {
   "name": "goaddon",
-  "root": "./",
   "sources": [
     "goaddon.go"
   ],

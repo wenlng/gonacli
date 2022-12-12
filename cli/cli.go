@@ -13,6 +13,8 @@ type CLI struct{}
 func printUsage() {
 	fmt.Println("Usage:")
 
+	fmt.Println("\tversion -- Get Version")
+	fmt.Println("\thelp -- Help")
 	fmt.Println("\tbuild -- Compile the golang source file of the export api")
 	fmt.Println("\tgenerate -- Generate napi c/c++ code of golang and addon bridge")
 	fmt.Println("\tnodegyp -- Compile addon bindings of nodejs")
@@ -25,7 +27,7 @@ func isValidArgs() {
 	}
 }
 
-func (cli *CLI) Run() {
+func (cli *CLI) Run(name string, version string) {
 	isValidArgs()
 
 	// gonacli build
@@ -34,6 +36,10 @@ func (cli *CLI) Run() {
 	generateCmd := flag.NewFlagSet("generate", flag.ExitOnError)
 	// gonacli make
 	makeCmd := flag.NewFlagSet("make", flag.ExitOnError)
+	// gonacli version
+	versionCmd := flag.NewFlagSet("version", flag.ExitOnError)
+	// gonacli help
+	helpCmd := flag.NewFlagSet("help", flag.ExitOnError)
 
 	// gonacli build --config xxx.json
 	buildCofig := buildCmd.String("config", "goaddon.json", "Addon api export configuration file")
@@ -67,20 +73,43 @@ func (cli *CLI) Run() {
 		if err != nil {
 			log.Panic(err)
 		}
+	case "version":
+		err := versionCmd.Parse(os.Args[2:])
+		if err != nil {
+			log.Panic(err)
+		}
+	case "help":
+		err := helpCmd.Parse(os.Args[2:])
+		if err != nil {
+			log.Panic(err)
+		}
 	default:
 		printUsage()
 		os.Exit(1)
 	}
 
+	if helpCmd.Parsed() {
+		printUsage()
+		return
+	}
+
+	if versionCmd.Parsed() {
+		fmt.Println(name, version)
+		return
+	}
+
 	if buildCmd.Parsed() {
 		task.RunBuildTask(*buildCofig, *buildArg)
+		return
 	}
 
 	if generateCmd.Parsed() {
 		task.RunGenerateTask(*generateConfig)
+		return
 	}
 
 	if makeCmd.Parsed() {
 		task.RunMakeTask(*makeConfig, *makeArg, *makeMpn)
+		return
 	}
 }

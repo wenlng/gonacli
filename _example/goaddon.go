@@ -179,6 +179,10 @@ func FilterArrayBuffer(c *C.char) unsafe.Pointer {
 	//vv := string(v)
 	fmt.Println("golang out >>>>", vv, len(vv))
 	return C.CBytes([]byte("abbcwawe---你好abc"))
+
+	//var cmsg *C.char = C.CString("golang out >>>> byte")
+	//defer C.free(unsafe.Pointer(cmsg))
+	//return unsafe.Pointer(cmsg)
 }
 
 //export CountArrayBuffer
