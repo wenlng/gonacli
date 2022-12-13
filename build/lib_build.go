@@ -37,6 +37,7 @@ func BuildGoToLibrary(cfgs config.Config, args string) bool {
 	}
 	_ = tools.RemoveFiles(paths)
 
+	clog.Info("Start build library ...")
 	sourceFiles := genBuildFile(cfgs)
 	if d := buildGoToLibrary(sourceFiles, libName, outputDir, args); !d {
 		done = false
