@@ -1,7 +1,7 @@
 <div align="center">
 <img width="120" style="padding-top: 50px" src="http://47.104.180.148/gonacli/gonacli_logo.svg"/>
 <h1 style="margin: 0; padding: 0">GonaCli</h1>
-<p>This is a development tool that can quickly use Golang to develop and build NodeJS Addon extensions</p>
+<p>This is a development tool that can quickly use Golang to develop and build NodeJS Addon</p>
 <a href="https://goreportcard.com/report/github.com/wenlng/gonacli"><img src="https://goreportcard.com/badge/github.com/wenlng/gonacli"/></a>
 <a href="https://godoc.org/github.com/wenlng/gonacli"><img src="https://godoc.org/github.com/wenlng/gonacli?status.svg"/></a>
 <a href="https://github.com/wenlng/gonacli/releases"><img src="https://img.shields.io/github/v/release/wenlng/gonacli.svg"/></a>
