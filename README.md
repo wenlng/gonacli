@@ -168,7 +168,7 @@ $ gonacli generate --config ./goaddon.json
 $ gonacli make --npm-i
 ```
 
-#### 4. Create JS Test File
+#### 5. Create JS Test File
 /test.js
 ``` javascript
 const demoaddon = require('./demoaddon')
