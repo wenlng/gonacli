@@ -24,6 +24,12 @@ func MakeToAddon(cfgs config.Config, args string, makeMpn bool) bool {
 		done = false
 	}
 
+	// 检测是否存在 node_modules 目录
+	if !tools.Exists(filepath.Join(path, "node_modules")) && !makeMpn {
+		clog.Error("Please add \"--npm-i\" args to make for the first time.")
+		return false
+	}
+
 	// 清空生成的相关文件
 	_ = tools.RemoveDirContents(filepath.Join(path, "build"))
 	files := []string{

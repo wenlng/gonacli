@@ -166,6 +166,7 @@ $ gonacli generate --config ./goaddon.json
 #### 4、编译 Nodejs Adddon
 ``` shell
 # 生成保存到 ./demoaddon/build 目录下
+# 首次 make 需要加 --npm-i 参数
 $ gonacli make --npm-i
 ```
 
