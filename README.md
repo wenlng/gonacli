@@ -234,13 +234,13 @@ $ node ./test.js
 
 ### array type
 <p>When there are multiple levels when returning, it is not recommended to use in the returntype</p>
-<p>1. The "array" type received in Golang is a string "*C.Char" type, which needs to be use "make([]interface{}, 0)" and "json.Unmarshal"</p>
+<p>1. The "array" type received in Golang is a string "*C.Char" type, which needs to be use "[]interface{}" and "json.Unmarshal"</p>
 <p>2. The "array" type is when Golang returns "*C.Char" type, use "json.Marshal"</p>
 <p>3. The "array" type is an Array type when JavaScript is passed, but currently only supports one layer when receiving. Please use string method to return multiple layers in Golang, and then use JavaScript's "JSON.parse"</p>
 
 ### object type
 <p>When there are multiple levels when returning, it is not recommended to use in the returntype</p>
-<p>1. The "object" type received in Golang is a string type. You need to use "make([string]interface{}, 0)" and "json.Unmarshal"</p>
+<p>1. The "object" type received in Golang is a string type. You need to use "[string]interface{}" and "json.Unmarshal"</p>
 <p>2. 2. The "object" type is when Golang returns "*C.Char" type, use "json.Marshal"</p>
 <p>3. The "object" type is an Object type when JavaScript is passed, but currently only supports one layer when receiving. Please use string method to return multiple layers in Golang, and then use JavaScript's "JSON.parse"</p>
 

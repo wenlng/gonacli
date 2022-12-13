@@ -234,12 +234,12 @@ $ node ./test.js
 <p>returntype 字段没有 callback 类型</p>
 
 ### array 类型（当返回时存在多层时，在 returntype 中不推荐使用）
-<p>1、array 类型在 Golang 接收是字符串类型，需要配合使用 make([]interface{}, 0) 和 json.Unmarshal</p>
+<p>1、array 类型在 Golang 接收是字符串类型，需要配合使用 []interface{} 和 json.Unmarshal</p>
 <p>2、array 类型在 Golang 返回时是 *C.char 类型，配合使用 json.Marshal</p>
 <p>3、array 类型在 JavaScript 传递时是数组类型，但在接收时目前只支持一层，在 Golang 返回多层请使用字符串方式返回再使用 JavaScrpt 的 JSON.parse</p>
 
 ### object 类型（当返回时存在多层时，在 returntype 中不推荐使用）
-<p>1、object 类型在 Golang 接收是字符串 *C.char 类型，需要配合使用 make([string]interface{}, 0) 和 json.Unmarshal</p>
+<p>1、object 类型在 Golang 接收是字符串 *C.char 类型，需要配合使用 [string]interface{} 和 json.Unmarshal</p>
 <p>2、object 类型在 Golang 返回时是 *C.char 类型，配合使用 json.Marshal</p>
 <p>3、object 类型在 JavaScript 传递时是对象类型，但在接收时目前只支持一层，在 Golang 返回多层请使用字符串方式返回再使用 JavaScrpt 的 JSON.parse</p>
 
