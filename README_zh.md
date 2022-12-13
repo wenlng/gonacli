@@ -132,6 +132,7 @@ $ node-gyp -v
 #### 2、编写 Golang 代码
 /demoaddon.go
 ``` go
+package main
 import "C"
 
 // 注意：//export xxxx 是必须的
