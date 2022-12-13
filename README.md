@@ -299,6 +299,16 @@ func Hello(_name *C.char) s *C.char {
 }
 ```
 
+#### 3. Test
+/test.js
+``` javascript
+const demoaddon = require('./demoaddon')
+
+const name = "awen"
+const res = demoaddon.hello(name)
+console.log('>>> ', res)
+```
+
 <br/>
 
 ## JavaScript Async Call
@@ -357,6 +367,17 @@ func Hello(_name *C.char, cbsFnName *C.char) s *C.char {
 	
 	return C.CString(res)
 }
+```
+
+#### 3. Test
+/test.js
+``` javascript
+const demoaddon = require('./demoaddon')
+
+const name = "awen"
+demoaddon.hello(name, funciton(res){
+    console.log('>>> ', res)
+})
 ```
 
 <br/>
