@@ -15,9 +15,9 @@ func printUsage() {
 
 	fmt.Println("\tversion -- Get Version")
 	fmt.Println("\thelp -- Help")
-	fmt.Println("\tbuild -- Compile the golang source file of the export api")
 	fmt.Println("\tgenerate -- Generate napi c/c++ code of golang and addon bridge")
-	fmt.Println("\tnodegyp -- Compile addon bindings of nodejs")
+	fmt.Println("\tbuild -- Compile the golang source file of the export api")
+	fmt.Println("\tmake -- Compile addon bindings of nodejs")
 }
 
 func isValidArgs() {
