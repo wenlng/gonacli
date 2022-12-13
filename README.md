@@ -275,6 +275,7 @@ $ node ./test.js
 #### 2. Golang Code
 /demoaddon.go
 ``` go
+package main
 import "C"
 
 //export Hello
@@ -345,6 +346,7 @@ console.log('>>> ', res)
 #### 2. Golang Code
 /demoaddon.go
 ``` go
+package main
 import "C"
 
 //export Hello
