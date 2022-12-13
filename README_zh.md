@@ -17,7 +17,7 @@
 <br/>
 
 <p>
-GONACLI 是一套能快速使用 Golang 开发 NodeJS Addon 扩展的开发工具，开发者只需要专注在 Golang 上的开发，无需关心 Bridge 桥接层的实现，支持 JavaScript 同步调用和异步回调等。
+GONACLI 是一套能快速使用 Golang 开发 NodeJS Addon 扩展的开发工具，开发者只需要专注在 Golang 的开发，无需关心 Bridge 桥接层的实现，支持 JavaScript 同步调用和异步回调等。
 </p>
 
 
