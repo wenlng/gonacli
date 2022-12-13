@@ -1,7 +1,7 @@
 <div align="center">
 <img width="120" style="padding-top: 50px" src="http://47.104.180.148/gonacli/gonacli_logo.svg"/>
 <h1 style="margin: 0; padding: 0">GonaCli</h1>
-<p>Command Line of Golang bridge to Nodejs Addon</p>
+<p>This is a development tool that can quickly use Golang to develop and build NodeJS Addon extensions</p>
 <a href="https://goreportcard.com/report/github.com/wenlng/gonacli"><img src="https://goreportcard.com/badge/github.com/wenlng/gonacli"/></a>
 <a href="https://godoc.org/github.com/wenlng/gonacli"><img src="https://godoc.org/github.com/wenlng/gonacli?status.svg"/></a>
 <a href="https://github.com/wenlng/gonacli/releases"><img src="https://img.shields.io/github/v/release/wenlng/gonacli.svg"/></a>
@@ -15,82 +15,80 @@
 > English | [中文](README_zh.md)
 
 <p>
-This is a development tool to generate and build c/c++ code of nodejs addon bridging golang.
+GONACLI is a development tool that quickly uses Golang to develop NodeJS Addon. You only need to concentrate on the development of Golang, and you don't need to care about the implementation of the bridge layer. It supports JavaScript synchronous calls and asynchronous callbacks.
 </p>
+
+<br/>
 
 <p> ⭐️ If it helps you, please give a star.</p>
 
-- Github：[https://github.com/wenlng/gonacli](https://github.com/wenlng/gonacli)
+- [https://github.com/wenlng/gonacli](https://github.com/wenlng/gonacli)
+
 
 <br/>
 
-Sorry, the English document is in translation ...
-
-<br/>
-
-## 使用 golang 方式安装
-安装前需要确保系统配置好了 GOPATH 及最终编译到 bin 目录的相关环境变量
-``` shell script
+## Use Golang Install
+Ensure that the system is configured with GOPATH environment variables before installation
+``` shell
 # .bash_profile
 export GOPATH="/Users/awen/go"
-# 配置 bin 目录，使用 golang 方式安装是必须的
+# set bin dir
 export PATH="$PATH:$GOPATH:$GOPATH/bin"
 ```
 
-安装 gonacli 工具
-``` shell script
+Install
+``` shell
 $ go install github.com/wenlng/gonacli
 $ gonacli version
 ```
 <br/>
 
-## gonacli 中的命令
-### 1、generate 命令
-> 根据 goaddon 的配置生成对应 NodeJS Addon 扩展的 Napi、C/C++ 中间代码，用于桥接 Golang 的程序
-``` shell script
-# 默认将读取当前目录下的 goaddon.json 配置文件
+## Gonacli Command
+### 1. generate
+Generate Napi, C/C++ bridge code related to NodeJS Addon extension according to the configuration of goaddon
+``` shell
+# By default, it reads the goaddon in the current directory Json configuration file
 $ gonacli generate
 
-# --config 参数指定配置文件
+# --config Specify Profile
 $ gonacli generate --config demoaddon.json
 ```
-### 2、build 命令
-> 相当于 go build -buildmode=c-archive 命令，编译静态库
-``` shell script
-# 将 Go CGO 编译生成静态库
+### 2. build
+Same as the "go build - buildmode=c-archive" command, compile the library
+``` shell
+# Compile to generate library
 $ gonacli build
 
-# --args 参数指定 go build 的参数
+# --args: Specify the args of go build
 $ gonacli build --args '-ldflags "-s -w"'
 ```
-### 3、make 命令
-> 相当于 node-gyp configure && node-gyp build
-命令，将 Napi、C/C++ 代码和静态库编译成最终的 NodeJS Addon 扩展
+### 3. make
+Same as the "node-gyp configure && node-gyp build" command，Compile NodeJS Addon
 
 ``` text
-使用 make 命令请请确保系统已安装了 node-gyp 编译工具
-使用 -npm-i 参数时请确保系统已安装了 NPM 包依赖管理工具
+Please ensure that the node gyp compiler has been installed on the system before using the "make" command
+
+Before using the "--npm-i" arg, ensure that the system has installed the NPM package dependency management tool
 ```
 
-``` shell script
-# --npm-i 参数是使用 NPM 安装 Napi 和 Bindings 依赖
-# --npm-i 参数等同于先执行 npm install，后再执行 node-gyp configure && node-gyp build
+``` shell
+# --npm-i: Use NPM Instal Napi and Bindings dependency
+# --npm-i: Before run npm install，Then run node-gyp configure && node-gyp build
 $ gonacli make --npm-i
 
-# --npm-i 参数在首次执行 make 时指定即可，第二次 make 后因为安装过依赖无需再次指定
-# 直接执行 node-gyp configure && node-gyp build 编译扩展
+# --npm-i: It can be directly executed "make" after using npm to install dependencies
 $ gonacli make
 
-# --args 参数指定 node-gyp build 的参数，例如调试 --debug 参数
+# --args: Specify the parameters of node gyp build，for example "--debug"
 $ gonacli make --args '--debug'
 ```
 
 <br/>
 
-## 快速使用
-<p>Tip：确保相关命令能正常使用</p>
+## Quick Use
+<p>Tip：Ensure that relevant commands can be used normally</p>
 
-``` shell script
+``` shell
 # go
 $ go version
 
@@ -105,7 +103,7 @@ $ node-gyp -v
 ```
 
 
-#### 1、新建配置文件
+#### 1. Create Goaddon Configure File
 /goaddon.json
 ``` json
 {
@@ -131,16 +129,16 @@ $ node-gyp -v
 }
 ```
 
-#### 2、编写 Golang 代码
+#### 2. Write Golang Code
 /demoaddon.go
 ``` go
 import "C"
 
-// 注意：//export xxxx 是必须的
+// notice：//export xxxx is necessary
 
 //export Hello
 func Hello(_name *C.char) s *C.char {
-	// 传入 string 类型，返回 string 类型
+	// args string type，return string type
 	name := C.GoString(_name)
 	
 	res := "hello"
@@ -152,25 +150,25 @@ func Hello(_name *C.char) s *C.char {
 }
 ```
 
-编译静态库
-``` shell script
-# 保存到 ./demoaddon/ 目录下
+Compile libraries
+``` shell
+# Save to the "./demoaddon/" directory
 $ gonacli build
 ```
 
-#### 3、生成中间桥接的 Napi C/C++ 代码
-``` shell script
-# 生成保存到 ./demoaddon/ 目录下
+#### 3. Generate bridging Napi C/C++code
+``` shell
+# Save to the "./demoaddon/" directory
 $ gonacli generate --config ./goaddon.json
 ```
 
-#### 4、编译 Nodejs Adddon
-``` shell script
-# 生成保存到 ./demoaddon/build 目录下
+#### 4. Compile Nodejs Adddon
+``` shell
+# Save to the "./demoaddon/build" directory
 $ gonacli make --npm-i
 ```
 
-#### 4、编写 js 测试文件
+#### 4. Create JS Test File
 /test.js
 ``` javascript
 const demoaddon = require('./demoaddon')
@@ -181,39 +179,39 @@ console.log('>>> ', res)
 
 ```
 
-``` shell script
+``` shell
 $ node ./test.js
 # >>> hello, awen
 ```
 
 <br/>
 
-## 配置文件
-``` json
+## Configure File Description
+``` text
 {
-  "name": "demoaddon",      // Nodejs Addon 扩展的名称      
-  "sources": [              // go build 的文件列表，注意不能带有路径  
+  "name": "demoaddon",      // Name of Nodejs Addon
+  "sources": [              // File list of go build，Cannot have path
     "demoaddon.go"
   ],
-  "output": "./demoaddon/", // 最终输出目录路径
-  "exports": [              // 导出的接口，生成 Addon 的 Napi、C/C++ 代码
+  "output": "./demoaddon/", // Output directory path
+  "exports": [              // Exported interface, generating the Napi and C/C++ code of Addon
     {
-      "name": "Hello",      // Golang 对应的 //export Hello 接口名称，必须一致
-      "args": [             // 传递的参数列表，参数型必须按照下面参照表保持一致
-        {                   // 参数要细心严谨，往往是因为配置的类型与 Golang 入口的不一致而导致编译失败
+      "name": "Hello",      // The name of the "//export Hello" interface corresponding to Golang must be consistent
+      "args": [             // The parameter type of the passed parameter list must be consistent with the type table
+        {                  
           "name": "name",
           "type": "string"
         }
       ],
-      "returntype": "string",   // 返回给 JavaScript 的类型，没有 callback 类型
-      "jscallname": "hello",    // JavaScript 调用的名称
-      "jscallmode": "sync"      // sync 为同步执行、async 为异步执行（async值必须在args参数中指明 callback 类型参数）
+      "returntype": "string",   // The type returned to JavaScript，has no callback type
+      "jscallname": "hello",    // JavaScript call name
+      "jscallmode": "sync"      // Sync is synchronous execution, and Async is asynchronous execution
     }
   ]
 }
 ```
 
-## 参数类型对照表
+## Type Table
 
 |    Type     | Golang Args | Golang Return  |   JS / TS   |
 |:-----------:|:-----------:|:--------------:|:-----------:|
@@ -230,27 +228,136 @@ $ node ./test.js
 | arraybuffer |   *C.char   | unsafe.Pointer | ArrayBuffer |
 |  callback   |   *C.char   |       -        |  Function   |
 
-### 关于配置文件的 returntype 字段类型
-``` text
-returntype 字段没有 callback 类型
+### The returntype field type of the configuration file
+<p>The returntype field has no callback type</p>
+
+### array type
+<p>When there are multiple levels when returning, it is not recommended to use in the returntype</p>
+<p>1. The "array" type received in Golang is a string "*C.Char" type, which needs to be use "make([]interface{}, 0)" and "json.Unmarshal"</p>
+<p>2. The "array" type is when Golang returns "*C.Char" type, use "json.Marshal"</p>
+<p>3. The "array" type is an Array type when JavaScript is passed, but currently only supports one layer when receiving. Please use string method to return multiple layers in Golang, and then use JavaScript's "JSON.parse"</p>
+
+### object type
+<p>When there are multiple levels when returning, it is not recommended to use in the returntype</p>
+<p>1. The "object" type received in Golang is a string type. You need to use "make([string]interface{}, 0)" and "json.Unmarshal"</p>
+<p>2. 2. The "object" type is when Golang returns "*C.Char" type, use "json.Marshal"</p>
+<p>3. The "object" type is an Object type when JavaScript is passed, but currently only supports one layer when receiving. Please use string method to return multiple layers in Golang, and then use JavaScript's "JSON.parse"</p>
+
+<br/>
+
+## JavaScript Sync Call
+/goaddon.json
+``` json
+{
+  "name": "demoaddon",
+  "sources": [
+    "demoaddon.go"
+  ],
+  "output": "./demoaddon/",
+  "exports": [
+    {
+      "name": "Hello",
+      "args": [
+        {
+          "name": "name",
+          "type": "string"
+        }
+      ],
+      "returntype": "string",
+      "jscallname": "hello",
+      "jscallmode": "sync"
+    }
+  ]
+}
 ```
 
-### 关于 array 类型<返回时值有多层时，在 returntype 中不推荐使用>
-``` text
-1、array 类型在 Golang 接收是字符串类型，需要配合使用 make([]interface{}, 0) 和 json.Unmarshal
-2、array 类型在 Golang 返回时是 *C.char 类型，配合使用 json.Marshal
-3、array 类型在 JavaScript 传递时是数组类型，但在接收时目前只支持一层，在 Golang 返回多层请使用字符串方式返回再使用 JavaScrpt 的 JSON.parse
-```
+#### 2. Golang Code
+/demoaddon.go
+``` go
+import "C"
 
-### 关于 object 类型<返回时值有多层时，在 returntype 中不推荐使用>
-``` text
-1、object 类型在 Golang 接收是字符串类型，需要配合使用 make([string]interface{}, 0) 和 json.Unmarshal
-2、object 类型在 Golang 返回时是 *C.char 类型，配合使用 json.Marshal
-3、object 类型在 JavaScript 传递时是数组类型，但在接收时目前只支持一层，在 Golang 返回多层请使用字符串方式返回再使用 JavaScrpt 的 JSON.parse
+//export Hello
+func Hello(_name *C.char) s *C.char {
+	// args is string type，return string type
+	name := C.GoString(_name)
+	
+	res := "hello"
+	ch := make(chan bool)
+
+	go func() {
+	    // Time consuming task processing
+	    time.Sleep(time.Duration(2) * time.Second)
+		if len(name) > 0 {
+	        res += "," + name
+	    }   
+		ch <- true
+	}()
+
+	<-ch
+	
+	return C.CString(res)
+}
 ```
 
 <br/>
-> Buy the author coffee: [http://witkeycode.com/sponsor](http://witkeycode.com/sponsor)
+
+## JavaScript Async Call
+/goaddon.json
+``` json
+{
+  "name": "demoaddon",
+  "sources": [
+    "demoaddon.go"
+  ],
+  "output": "./demoaddon/",
+  "exports": [
+    {
+      "name": "Hello",
+      "args": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "cbs",
+          "type": "callback"
+        }
+      ],
+      "returntype": "string",
+      "jscallname": "hello",
+      "jscallmode": "async"
+    }
+  ]
+}
+```
+
+#### 2. Golang Code
+/demoaddon.go
+``` go
+import "C"
+
+//export Hello
+func Hello(_name *C.char, cbsFnName *C.char) s *C.char {
+	// args is string type，return string type
+	name := C.GoString(_name)
+	
+	res := "hello"
+	ch := make(chan bool)
+
+    go func() {
+	    // Time consuming task processing
+		time.Sleep(time.Duration(2) * time.Second)
+		if len(name) > 0 {
+	        res += "," + name
+	    }   
+		ch <- true
+	}()
+
+	<-ch
+	
+	return C.CString(res)
+}
+```
 
 <br/>
 
