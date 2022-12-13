@@ -42,13 +42,15 @@ func RunBuildTask(config string, args string) {
 		return
 	}
 
-	// 删除 args 两边 ' 或 "
-	if strings.Index(args, "'") == 0 || strings.Index(args, "\"") == 0 {
-		args = args[1:]
-	}
+	if len(args) > 0 {
+		// 删除 args 两边 ' 或 "
+		if strings.Index(args, "'") == 0 || strings.Index(args, "\"") == 0 {
+			args = args[1:]
+		}
 
-	if strings.LastIndex(args, "'") == len(args)-1 || strings.LastIndex(args, "\"") == len(args)-1 {
-		args = args[:len(args)-1]
+		if strings.LastIndex(args, "'") == len(args)-1 || strings.LastIndex(args, "\"") == len(args)-1 {
+			args = args[:len(args)-1]
+		}
 	}
 
 	// 生成 golang lib
@@ -101,13 +103,15 @@ func RunMakeTask(config string, args string, makeMpn bool) {
 		return
 	}
 
-	// 删除 args 两边 ' 或 "
-	if strings.Index(args, "'") == 0 || strings.Index(args, "\"") == 0 {
-		args = args[1:]
-	}
+	if len(args) > 0 {
+		// 删除 args 两边 ' 或 "
+		if strings.Index(args, "'") == 0 || strings.Index(args, "\"") == 0 {
+			args = args[1:]
+		}
 
-	if strings.LastIndex(args, "'") == len(args)-1 || strings.LastIndex(args, "\"") == len(args)-1 {
-		args = args[:len(args)-1]
+		if strings.LastIndex(args, "'") == len(args)-1 || strings.LastIndex(args, "\"") == len(args)-1 {
+			args = args[:len(args)-1]
+		}
 	}
 
 	if done := build.MakeToAddon(cfgs, args, makeMpn); done {
