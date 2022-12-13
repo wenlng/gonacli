@@ -85,7 +85,7 @@ $ gonacli make --args '--debug'
 
 <br/>
 
-## Quick Use
+## Quickly use Golang to develop an instance of NodeJS Addon
 <p>Tip：Ensure that relevant commands can be used normally</p>
 
 ``` shell

@@ -85,7 +85,7 @@ $ gonacli make --args '--debug'
 
 <br/>
 
-## 快速使用
+## 快速使用 Golang 开发 NodeJS Addon 的实例
 <p>Tip：确保相关命令能正常使用</p>
 
 ``` shell
