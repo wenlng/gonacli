@@ -28,17 +28,16 @@ GONACLI is a development tool that quickly uses Golang to develop NodeJS Addon. 
 <br/>
 
 ## Compatible Support
-- linux / macos
-- linux / macos
-- nodejs(12.0+)
-- npm(6.0+)
-- node-gyp(9.0+)
-- go(1.14+)
+- Linux / Mac OS / Windows
+- NodeJS(12.0+)
+- Npm(6.0+)
+- Node-gyp(9.0+)
+- Go(1.14+)
 
 ## Use Golang Install
 <p>Ensure that the system is configured with GOPATH environment variables before installation</p>
 
-linux or Mac OS
+Linux or Mac OS
 ``` shell
 # .bash_profile
 export GOPATH="/Users/awen/go"
@@ -46,32 +45,50 @@ export GOPATH="/Users/awen/go"
 export PATH="$PATH:$GOPATH:$GOPATH/bin"
 ```
 
-window
+Window
 ``` shell
 # set system path
 GOPATH: C:\awen\go
 # set bin dir
-PATH: GOPATH\bin
+PATH: %GOPATH%\bin
 ``` 
 
 Install
 ``` shell
 $ go install github.com/wenlng/gonacli@latest
+
 $ gonacli version
 ```
 <br/>
 
+
+## Compilation Of Windows OS Environment
+<p> In the Windows OS environment, you need to install the "gcc/g++" compiler support required by Go CGO, download the MinGW installation, configure the PATH environment variable of "MinGW/bin", and execute "gcc" normally on the command line.</p>
+
+``` shell
+$ gcc -v
+```
+
+<p>When compiling Node Addon in the Windows OS environment, you also need to install the c/c++ compilation tool that node-gyp depends on.</p>
+
+``` shell
+$ npm install --global --production windows-build-tools
+```
+
 ## Gonacli Command
 ### 1. generate
+
 Generate Napi, C/C++ bridge code related to NodeJS Addon according to the configuration of goaddon
 ``` shell
 # By default, it reads the goaddon in the current directory Json configuration file
 $ gonacli generate
 
-# --config Specify Profile
+# --config: Specify Profile
 $ gonacli generate --config demoaddon.json
 ```
+
 ### 2. build
+
 <p>Same as the "go build - buildmode=c-archive" command, compile the library</p>
 
 ``` shell
@@ -79,11 +96,35 @@ $ gonacli generate --config demoaddon.json
 $ gonacli build
 
 # --args: Specify the args of go build
+# --config: Specify Profile
 $ gonacli build --args '-ldflags "-s -w"'
 ```
-### 3. make
-<p>Same as the "node-gyp configure && node-gyp build" command，Compile NodeJS Addon</p>
 
+### 3. install
+
+<p>Same as the "npm install"， Install NodeJS dependencies.</p>
+
+``` shell
+# --config: Specify Profile
+$ gonacli install --config demoaddon.json
+```
+
+### 4. msvc
+
+<p>Select "dlltool.exe" in the Windows OS environment or "lib.exe"</p>
+<p>1."dlltool.exe" of "MinGW"</p>
+<p>2."lib.exe" of "Microsoft Visual c++ Build tools" or "Visual Studio"</p>
+
+``` shell
+# --vs: use VS "lib.exe", default is "dlltool.exe" of MinGW
+# --32x: Supports 32-bit OS，default 64.
+# --config: Specify Profile
+$ gonacli msvc --config demoaddon.json
+```
+
+### 5. make
+
+<p>Same as the "node-gyp configure && node-gyp build" command，Compile NodeJS Addon</p>
 
 ``` text
 Please ensure that the node gyp compiler has been installed on the system before using the "make" command
@@ -92,21 +133,14 @@ Before using the "--npm-i" arg, ensure that the system has installed the npm pac
 ```
 
 ``` shell
-# --npm-i: Use NPM Instal Napi and Bindings dependency
-# --npm-i: Before run npm install，Then run node-gyp configure && node-gyp build
-$ gonacli make --npm-i
-
-# --npm-i: It can be directly executed "make" after using npm to install dependencies
-$ gonacli make
-
-# --args: Specify the parameters of node gyp build，for example "--debug"
+# --args: Specify the parameters of node-gyp build，for example "--debug"
 $ gonacli make --args '--debug'
 ```
 
 <br/>
 
-## Use Golang to develop an demo of NodeJS Addon
-<p>Tip：Ensure that relevant commands can be used normally</p>
+## Use Golang to develop an Demo of NodeJS Addon
+<p>Tip：Ensure that relevant commands can be used normally, This is an demo under Linux/OS environment.</p>
 
 ``` shell
 # go
@@ -171,28 +205,36 @@ func Hello(_name *C.char) s *C.char {
 }
 ```
 
-Compile libraries
-``` shell
-# Save to the "./demoaddon/" directory
-$ gonacli build
-```
-
-#### 3. Generate bridging Napi C/C++code
+#### 3. Generate Rridging Napi C/C++ Code
 ``` shell
 # Save to the "./demoaddon/" directory
 $ gonacli generate --config ./goaddon.json
 ```
 
-#### 4. Compile Nodejs Adddon
+#### 4.Compile Libraries
 ``` shell
-# Save to the "./demoaddon/build" directory
-$ gonacli make --npm-i
+# Save to the "./demoaddon/" directory
+$ gonacli build
 ```
 
-#### 5. Create JS Test File
-/test.js
+
+#### 5. Install Dependencies
+``` shell
+# Save to the "./demoaddon/build" directory
+$ gonacli install
+```
+
+
+#### 6. Compile Nodejs Adddon
+``` shell
+# Save to the "./demoaddon/build" directory
+$ gonacli make
+```
+
+#### 7. Create JS Test File
+/demoaddon/test.js
 ``` javascript
-const demoaddon = require('./demoaddon')
+const demoaddon = require('.')
 
 const name = "awen"
 const res = demoaddon.hello(name)

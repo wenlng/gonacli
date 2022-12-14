@@ -1,24 +1,14 @@
-package build
+package buildtask
 
 import (
 	"github.com/wenlng/gonacli/binding"
-	"github.com/wenlng/gonacli/check"
-	"github.com/wenlng/gonacli/clog"
 	"github.com/wenlng/gonacli/config"
 	"github.com/wenlng/gonacli/content"
 	"github.com/wenlng/gonacli/tools"
 	"path/filepath"
 )
 
-func GenerateAddonBridge(cfgs config.Config) bool {
-	// 检查配置文件
-	if err := check.CheckBaseConfig(cfgs); err != nil {
-		clog.Error(err)
-		return false
-	}
-	if c := check.CheckExportApiWithSourceFile(cfgs); !c {
-		return false
-	}
+func generateAddonBridge(cfgs config.Config) bool {
 
 	cppName := cfgs.Name + ".cc"
 	bindingName := "binding.gyp"

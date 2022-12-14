@@ -1,4 +1,4 @@
-const goaddon = require('./addon')
+const goaddon = require('.')
 
 // console.log(goaddon.intSum32(50, 3))
 // console.log(goaddon.intSum64(50, 30))

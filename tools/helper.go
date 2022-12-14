@@ -51,21 +51,22 @@ func Exists(path string) bool {
 	return true
 }
 
-func WriteFile(content string, dirname string, filename string) {
+func WriteFile(content string, dirname string, filename string) error {
 	_ = os.MkdirAll(dirname, 0777)
 	file := dirname + filename
 	logFile, err := os.OpenFile(file, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0777)
 	if err != nil {
 		log.Println(">>> ", err)
-		return
+		return err
 	}
 
 	defer logFile.Close()
 	_, err1 := io.WriteString(logFile, content)
 	if err1 != nil {
 		log.Println(">>> ", err1)
-		return
+		return err
 	}
+	return nil
 }
 
 func CheckOS64Unit() bool {
@@ -123,6 +124,9 @@ func IsLinuxOs() bool {
 }
 
 func FormatDirPath(op string) string {
+	if strings.LastIndex(op, "/") != len(op)-1 {
+		op += "/"
+	}
 	if strings.Index(op, "/") == 0 {
 		return op
 	}

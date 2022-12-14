@@ -6,6 +6,11 @@ import (
 )
 
 func GenGypFile(cfgs config.Config, bindingName string) bool {
+	ext := ".a"
+	if tools.IsWindowsOs() {
+		ext = ".lib"
+	}
+
 	code := `{
     "targets": [
         {
@@ -18,7 +23,7 @@ func GenGypFile(cfgs config.Config, bindingName string) bool {
             ],
             'defines': [ 'NAPI_DISABLE_CPP_EXCEPTIONS' ],
             "libraries": [
-                "../` + cfgs.Name + `.a"
+                "../` + cfgs.Name + ext + `"
             ],
         }
     ]

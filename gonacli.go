@@ -1,10 +1,12 @@
 package main
 
-import "github.com/wenlng/gonacli/cli"
+import (
+	"github.com/wenlng/gonacli/cli"
+)
 
 const (
 	Name    = "goncali"
-	Version = "v1.0.7"
+	Version = "v1.0.8"
 )
 
 func main() {

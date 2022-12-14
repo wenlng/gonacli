@@ -29,30 +29,30 @@ GONACLI 是一个快速使用 Golang 开发 NodeJS Addon 扩展的开发工具�
 - QQ交流群1：885267905
 
 ## 兼容支持
-- windows (正在兼容处理)
-- linux / macos
-- nodejs(12.0+)
-- npm(6.0+)
-- node-gyp(9.0+)
-- go(1.14+)
+- Linux / Mac OS / Windows
+- NodeJS(12.0+)
+- Npm(6.0+)
+- Node-gyp(9.0+)
+- Go(1.14+)
 
 ## 使用 go 方式安装 gonacli 工具
-<p>安装前需要确保系统配置好了 GOPATH 及最终编译保存到 bin 目录的相关环境变量</p>
+<p>安装前需要确保系统配置好了 GOPATH 及最终编译保存到 bin 目录的环境变量</p>
 
-linux or Mac OS
+Linux or Mac OS
 ``` shell
 # .bash_profile
 export GOPATH="/Users/awen/go"
+
 # 配置 bin 目录，使用 golang 方式安装是必须的
 export PATH="$PATH:$GOPATH:$GOPATH/bin"
 ``` 
 
-window
+Windows
 ``` shell
-# 系统环境变量设置
+# 打开系统环境变量设置
 GOPATH: C:\awen\go
 # 配置 bin 目录，使用 golang 方式安装是必须的
-PATH: GOPATH\bin
+PATH: %GOPATH%\bin
 ``` 
 
 开始安装
@@ -60,15 +60,31 @@ PATH: GOPATH\bin
 ```shell
 # linux or Mac OS
 $ GOPROXY=https://goproxy.cn/,direct && go install github.com/wenlng/gonacli@latest
+
 # widow
- $ set GOPROXY=https://goproxy.cn/,direct && go install github.com/wenlng/gonacli@latest
+$ set GOPROXY=https://goproxy.cn/,direct && go install github.com/wenlng/gonacli@latest
+
 $ gonacli version
 ```
 <br/>
 
-## gonacli 中的命令
+## Windows 环境编译
+<p> 在 Windows 开发环境下需要安装 Go CGO 需要的 gcc/g++ 编译器，可以下载 "MinGW" 安装，配置好 MinGW/bin 的 PATH 环境变量即可，在命令行能够正常执行 gcc 。</p>
+
+``` shell
+$ gcc -v
+```
+
+<p>Window 环境下还需要安装 NodeJS Addon 编译工具 node-gyp 依赖的 c/c++ 编译工具</p>
+
+``` shell
+$ npm install --global --production windows-build-tools
+```
+
+## gonacli 中的命令参数
 ### 1、generate
-<p>根据 goaddon 的配置生成对应 NodeJS Addon 扩展相关的 Napi、C/C++ 桥接代码</p>
+
+<p>根据 goaddon 的配置生成对应 NodeJS Addon 相关的 Napi、C/C++ 桥接代码</p>
 
 ``` shell
 # 默认将读取当前目录下的 goaddon.json 配置文件
@@ -77,31 +93,49 @@ $ gonacli generate
 # --config 参数指定配置文件
 $ gonacli generate --config demoaddon.json
 ```
+
 ### 2、build
+
 <p>相当于 go build -buildmode=c-archive 命令，编译静态库</p>
 
 ``` shell
 # 将 Go CGO 编译生成静态库
 $ gonacli build
 
-# --args 参数指定 go build 的参数
+# --config 参数指定配置文件
+# --args 参数指定 go build 的参数，需要用 '' 引号包裹
 $ gonacli build --args '-ldflags "-s -w"'
 ```
-### 3、make
-<p>相当于 node-gyp configure && node-gyp build 命令，编译成最终的 NodeJS Addon 扩展</p>
 
-``` text
-使用 make 命令请请确保系统已安装了 node-gyp 编译工具
-使用 -npm-i 参数时请确保系统已安装了 npm 包依赖管理工具
-```
+### 3、install
+
+<p>相当于 npm install 命令， 安装 NodeJS 需要的相关依赖</p>
 
 ``` shell
-# --npm-i 参数是使用 NPM 安装 Napi 和 Bindings 依赖
-# --npm-i 参数等同于先执行 npm install，后再执行 node-gyp configure && node-gyp build
-$ gonacli make --npm-i
+# --config 参数指定配置文件
+$ gonacli install --config demoaddon.json
+```
 
-# --npm-i 参数在首次执行 make 时指定即可，第二次 make 后因为安装过依赖无需再次指定
-# 直接执行 node-gyp configure && node-gyp build 编译扩展
+### 4、msvc
+
+<p>该命令只针对 window 环境下的兼容处理，需要 dlltool.exe 或 lib.exe (二选一)</p>
+<p>1、"MinGW" 支持 "dlltool.exe" 工具</p>
+<p>2、"Microsoft Visual c++ Build tools" 或 "Visual Studio" 的 "lib.exe" 工具</p>
+
+``` shell
+# --vs 参数表示使用 VS 的 "lib.exe" 工具，默认是 MinGW 的 "dlltool.exe" 工具
+# --32x 参数表示支持 32 位的系统，默认 64 位
+# --config 参数指定配置文件
+$ gonacli msvc --config demoaddon.json
+```
+
+### 5、make
+<p>相当于 node-gyp configure && node-gyp build 命令，编译成最终的 NodeJS Addon 扩展</p>
+
+<p>使用 make 命令请请确保系统已安装了 node-gyp 编译工具</p>
+
+``` shell
+# 编译
 $ gonacli make
 
 # --args 参数指定 node-gyp build 的参数，例如调试 --debug 参数
@@ -111,9 +145,9 @@ $ gonacli make --args '--debug'
 
 <br/>
 
-## Golang 开发 NodeJS Addon 的 Demo
+## 使用 Golang 快速开发 NodeJS Addon 的 Demo
 
-<p>Tip：确保相关命令能正常使用</p>
+<p>Tip：请确保相关命令能正常使用，该 Demo 是在 Linux / Macos 环境下进行</p>
 
 ``` shell
 # go
@@ -127,6 +161,9 @@ $ npm -v
 
 # node-gyp
 $ node-gyp -v
+
+# gcc
+$ gcc -v
 ```
 
 
@@ -178,29 +215,34 @@ func Hello(_name *C.char) s *C.char {
 }
 ```
 
-编译静态库
-``` shell
-# 保存到 ./demoaddon/ 目录下
-$ gonacli build
-```
-
 #### 3、生成桥接的 Napi C/C++ 代码
 ``` shell
 # 生成保存到 ./demoaddon/ 目录下
 $ gonacli generate --config ./goaddon.json
 ```
 
-#### 4、编译 Nodejs Adddon
+#### 4、编译静态库
 ``` shell
-# 生成保存到 ./demoaddon/build 目录下
-# 首次 make 需要加 --npm-i 参数
-$ gonacli make --npm-i
+# 保存到 ./demoaddon/ 目录下
+$ gonacli build
 ```
 
-#### 5、编写 js 测试文件
-/test.js
+#### 5、安装 Nodejs 相关依赖
+``` shell
+# 保存到 ./demoaddon/ 目录下
+$ gonacli install
+```
+
+#### 6、编译 Nodejs Adddon
+``` shell
+# 生成保存到 ./demoaddon/build 目录下
+$ gonacli make
+```
+
+#### 7、编写 js 测试文件
+/demoaddon/test.js
 ``` javascript
-const demoaddon = require('./demoaddon')
+const demoaddon = require('.')
 
 const name = "awen"
 const res = demoaddon.hello(name)
@@ -241,6 +283,7 @@ $ node ./test.js
 ```
 
 ## 类型对照表
+<p> -------- 请严格按照类型对照表 ------- </p>
 
 |    Type     | Golang Args | Golang Return  |   JS / TS   |
 |:-----------:|:-----------:|:--------------:|:-----------:|

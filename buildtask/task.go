@@ -1,9 +1,10 @@
-package task
+package buildtask
 
 import (
 	"fmt"
 	"github.com/jinzhu/configor"
-	"github.com/wenlng/gonacli/build"
+	"github.com/wenlng/gonacli/buildtask/compatible"
+	"github.com/wenlng/gonacli/check"
 	"github.com/wenlng/gonacli/clog"
 	"github.com/wenlng/gonacli/config"
 	"github.com/wenlng/gonacli/tools"
@@ -35,10 +36,32 @@ func parseConfig(config string) bool {
 	return true
 }
 
+func checkConfigure(c config.Config) bool {
+	// 检查配置文件
+	if err := check.CheckBaseConfig(c); err != nil {
+		clog.Error(err)
+		return false
+	}
+	if err := check.CheckAsyncCorrectnessConfig(c); err != nil {
+		clog.Error(err)
+		return false
+	}
+	if c := check.CheckExportApiWithSourceFile(c); !c {
+		return false
+	}
+
+	return true
+}
+
 // 编译 golang lib 文件
 // gonacli build => go build -buildmode c-archive -o xxx.a xxx.go xxx1.go xxx2.go ...
 func RunBuildTask(config string, args string) {
 	if ok := parseConfig(config); !ok {
+		return
+	}
+
+	// 检测配置文件
+	if c := checkConfigure(cfgs); !c {
 		return
 	}
 
@@ -58,21 +81,11 @@ func RunBuildTask(config string, args string) {
 	}
 
 	// 生成 golang lib
-	done := true
-	if d := build.BuildGoToLibrary(cfgs, args); !d {
-		done = false
+	if d := buildGoToLibrary(cfgs, args); !d {
+		clog.Error("Fail build golang lib!")
+		return
 	}
 
-	if done {
-		buildDon(cfgs)
-	} else {
-		buildFail(cfgs)
-	}
-}
-func buildFail(cfgs config.Config) {
-	clog.Error("Fail build golang lib!")
-}
-func buildDon(cfgs config.Config) {
 	clog.Success("Successfully build golang lib ~")
 	fmt.Println("")
 }
@@ -83,16 +96,16 @@ func RunGenerateTask(config string) {
 		return
 	}
 
-	if done := build.GenerateAddonBridge(cfgs); done {
-		generateDon(cfgs)
-	} else {
-		generateFail(cfgs)
+	// 检测配置文件
+	if c := checkConfigure(cfgs); !c {
+		return
 	}
-}
-func generateFail(cfgs config.Config) {
-	clog.Error("Fail generated bridge code!")
-}
-func generateDon(cfgs config.Config) {
+
+	if done := generateAddonBridge(cfgs); !done {
+		clog.Error("Fail generated bridge code!")
+		return
+	}
+
 	clog.Success("Successfully generate the Addon bridge c/c++ code of Nodejs ~")
 	//clog.Info("Please execute the following command to make the addon of nodejs ~")
 	//clog.Info(fmt.Sprintf("> cd %s && gonacli make --config xxx.json", cfgs.OutPut))
@@ -101,9 +114,35 @@ func generateDon(cfgs config.Config) {
 	fmt.Println("")
 }
 
-// 编译 node addon 扩展
-func RunMakeTask(config string, args string, makeMpn bool) {
+// 初始化 npm install xxxx
+func RunInstallTask(config string) {
 	if ok := parseConfig(config); !ok {
+		return
+	}
+
+	// 检测配置文件
+	if c := checkConfigure(cfgs); !c {
+		return
+	}
+
+	// 生成扩展
+	if done := installDep(cfgs); !done {
+		clog.Error("Fail installed!")
+		return
+	}
+
+	clog.Success("Successfully installed ~")
+	fmt.Println("")
+}
+
+// 编译 node addon
+func RunMakeTask(config string, args string) {
+	if ok := parseConfig(config); !ok {
+		return
+	}
+
+	// 检测配置文件
+	if c := checkConfigure(cfgs); !c {
 		return
 	}
 
@@ -122,16 +161,50 @@ func RunMakeTask(config string, args string, makeMpn bool) {
 		}
 	}
 
-	if done := build.MakeToAddon(cfgs, args, makeMpn); done {
-		nodeMakeDon(cfgs)
-	} else {
-		nodeMakeFail(cfgs)
+	// 生成扩展
+	if done := makeToAddon(cfgs, args); !done {
+		clog.Error("Fail make addon!")
+		return
 	}
-}
-func nodeMakeFail(cfgs config.Config) {
-	clog.Error("Fail make addon!")
-}
-func nodeMakeDon(cfgs config.Config) {
+
 	clog.Success("Successfully make the addon of Nodejs ~")
+	fmt.Println("")
+}
+
+// window 环境下兼容处理
+func RunMsvcTask(config string, useVS bool, msvc32Vs bool) {
+	if ok := parseConfig(config); !ok {
+		return
+	}
+
+	// 检测配置文件
+	if c := checkConfigure(cfgs); !c {
+		return
+	}
+
+	// 修复兼容 MSVC
+	clog.Info("Staring fix file ...")
+	if tools.IsWindowsOs() {
+		compatible.FixCGOWithWindow(cfgs)
+	}
+	clog.Info("Fix file done ~")
+
+	// 生成dll
+	clog.Info("Staring build dll ...")
+	if done := buildToDll(cfgs); !done {
+		clog.Error("Fail build dll!")
+		return
+	}
+	clog.Success("Successfully build dll ~")
+	fmt.Println("")
+
+	// 生成 lib
+	clog.Info("Staring build lib ...")
+	if done := buildToMSVCLib(cfgs, useVS, msvc32Vs); !done {
+		clog.Error("Fail build lib!")
+		return
+	}
+
+	clog.Success("Successfully build lib ~")
 	fmt.Println("")
 }

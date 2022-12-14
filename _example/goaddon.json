@@ -3,7 +3,7 @@
   "sources": [
     "goaddon.go"
   ],
-  "output": "./addon/",
+  "output": "./_addon/",
   "exports": [
     {
       "name": "IntSum32",
