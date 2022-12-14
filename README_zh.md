@@ -29,7 +29,7 @@ GONACLI 是一个快速使用 Golang 开发 NodeJS Addon 扩展的开发工具�
 - QQ交流群1：885267905
 
 ## 兼容支持
-- windows (正在支持)
+- windows (正在兼容处理)
 - linux / macos
 - nodejs(12.0+)
 - npm(6.0+)
