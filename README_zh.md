@@ -1,7 +1,7 @@
 <div align="center">
 <img width="120" style="padding-top: 50px" src="http://47.104.180.148/gonacli/gonacli_logo.svg"/>
 <h1 style="margin: 0; padding: 0">GonaCli</h1>
-<p>一个快速使用 Golang 开发和构建生成 NodeJS Addon 扩展的开发工具</p>
+<p>一个能让 Golang 支持开发 NodeJS Addon 扩展的开发工具</p>
 <a href="https://goreportcard.com/report/github.com/wenlng/gonacli"><img src="https://goreportcard.com/badge/github.com/wenlng/gonacli"/></a>
 <a href="https://godoc.org/github.com/wenlng/gonacli"><img src="https://godoc.org/github.com/wenlng/gonacli?status.svg"/></a>
 <a href="https://github.com/wenlng/gonacli/releases"><img src="https://img.shields.io/github/v/release/wenlng/gonacli.svg"/></a>
