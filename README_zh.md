@@ -202,7 +202,7 @@ import "C"
 // 注意：//export xxxx 是必须的
 
 //export Hello
-func Hello(_name *C.char) s *C.char {
+func Hello(_name *C.char) *C.char {
 	// 传入 string 类型，返回 string 类型
 	name := C.GoString(_name)
 	
@@ -347,7 +347,7 @@ package main
 import "C"
 
 //export Hello
-func Hello(_name *C.char) s *C.char {
+func Hello(_name *C.char) *C.char {
 	// 传入 string 类型，返回 string 类型
 	name := C.GoString(_name)
 	
@@ -419,7 +419,7 @@ package main
 import "C"
 
 //export Hello
-func Hello(_name *C.char, cbsFnName *C.char) s *C.char {
+func Hello(_name *C.char, cbsFnName *C.char) *C.char {
 	// 传入 string 类型，返回 string 类型
 	name := C.GoString(_name)
 	

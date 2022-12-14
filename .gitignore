@@ -19,6 +19,7 @@ _example/addon/build
 _example/_addon/build
 .DS_Store
 .vscode
+_remark.md
 *.suo
 *.ntvs*
 *.njsproj

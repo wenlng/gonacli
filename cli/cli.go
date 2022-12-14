@@ -64,7 +64,7 @@ func (cli *CLI) Run(name string, version string) {
 	//makeMpn := makeCmd.Bool("npm-i", false, "Install npm dependencies")
 	// gonacli install --config xxx.json
 	installConfig := installCmd.String("config", "goaddon.json", "Addon api export configuration file")
-	// gonacli msvc --vs
+	// gonacli msvc vs
 	msvcVs := msvcCmd.Bool("vs", false, "Use \"Microsoft Visual c++ Build tools\" or \"Visual Studio\"")
 	msvc32Vs := msvcCmd.Bool("32x", false, "VS 32-bit System OS")
 

@@ -192,7 +192,7 @@ import "C"
 // notice：//export xxxx is necessary
 
 //export Hello
-func Hello(_name *C.char) s *C.char {
+func Hello(_name *C.char) *C.char {
 	// args string type，return string type
 	name := C.GoString(_name)
 	
@@ -340,7 +340,7 @@ package main
 import "C"
 
 //export Hello
-func Hello(_name *C.char) s *C.char {
+func Hello(_name *C.char) *C.char {
 	// args is string type，return string type
 	name := C.GoString(_name)
 	
@@ -411,7 +411,7 @@ package main
 import "C"
 
 //export Hello
-func Hello(_name *C.char, cbsFnName *C.char) s *C.char {
+func Hello(_name *C.char, cbsFnName *C.char) *C.char {
 	// args is string type，return string type
 	name := C.GoString(_name)
 	
