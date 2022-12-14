@@ -41,9 +41,12 @@ func GenCode(config config.Config, cppName string) bool {
 				curCode += resync.GenReturnArrayTypeCode(export)
 			} else if export.ReturnType == "object" {
 				curCode += resync.GenReturnObjectTypeCode(export)
-			} else if export.ReturnType == "arraybuffer" {
-				curCode += resync.GenReturnArrayBufferTypeCode(export)
 			}
+			/*
+				else if export.ReturnType == "arraybuffer" {
+					curCode += resync.GenReturnArrayBufferTypeCode(export)
+				}
+			*/
 		}
 	}
 

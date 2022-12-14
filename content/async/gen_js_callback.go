@@ -31,11 +31,14 @@ func genJsCallbackArgs(export config.Export) string {
 		code += reasync.GenAsyncCallbackArgArrayTypeCode()
 	} else if returnType == "object" {
 		code += reasync.GenAsyncCallbackArgObjectTypeCode()
-	} else if returnType == "arraybuffer" {
-		code += reasync.GenAsyncCallbackArgArrayBufferTypeCode()
 	} else {
 		code += tools.FormatCodeIndentLn(`napi_value argv[] = {};`, 4)
 	}
+	/*
+		 else if returnType == "arraybuffer" {
+				code += reasync.GenAsyncCallbackArgArrayBufferTypeCode()
+			}
+	*/
 
 	return code
 }

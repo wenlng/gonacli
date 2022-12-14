@@ -46,10 +46,14 @@ func RunBuildTask(config string, args string) {
 		// 删除 args 两边 ' 或 "
 		if strings.Index(args, "'") == 0 || strings.Index(args, "\"") == 0 {
 			args = args[1:]
-		}
-
-		if strings.LastIndex(args, "'") == len(args)-1 || strings.LastIndex(args, "\"") == len(args)-1 {
-			args = args[:len(args)-1]
+			if strings.LastIndex(args, "'") == len(args)-1 {
+				args = args[:len(args)-1]
+			}
+		} else if strings.Index(args, "\"") == 0 {
+			args = args[1:]
+			if strings.LastIndex(args, "\"") == len(args)-1 {
+				args = args[:len(args)-1]
+			}
 		}
 	}
 
@@ -90,10 +94,10 @@ func generateFail(cfgs config.Config) {
 }
 func generateDon(cfgs config.Config) {
 	clog.Success("Successfully generate the Addon bridge c/c++ code of Nodejs ~")
-	clog.Info("Please execute the following command to make the addon of nodejs ~")
-	clog.Info(fmt.Sprintf("> cd %s && gonacli make --config xxx.json", cfgs.OutPut))
-	clog.Info(fmt.Sprintf("or > cd %s && node-gyp configure && node-gyp build", cfgs.OutPut))
-	clog.Info(fmt.Sprintf("or > cd %s && npm install && npm run build", cfgs.OutPut))
+	//clog.Info("Please execute the following command to make the addon of nodejs ~")
+	//clog.Info(fmt.Sprintf("> cd %s && gonacli make --config xxx.json", cfgs.OutPut))
+	//clog.Info(fmt.Sprintf("or > cd %s && node-gyp configure && node-gyp build", cfgs.OutPut))
+	//clog.Info(fmt.Sprintf("or > cd %s && npm install && npm run build", cfgs.OutPut))
 	fmt.Println("")
 }
 
@@ -107,10 +111,14 @@ func RunMakeTask(config string, args string, makeMpn bool) {
 		// 删除 args 两边 ' 或 "
 		if strings.Index(args, "'") == 0 || strings.Index(args, "\"") == 0 {
 			args = args[1:]
-		}
-
-		if strings.LastIndex(args, "'") == len(args)-1 || strings.LastIndex(args, "\"") == len(args)-1 {
-			args = args[:len(args)-1]
+			if strings.LastIndex(args, "'") == len(args)-1 {
+				args = args[:len(args)-1]
+			}
+		} else if strings.Index(args, "\"") == 0 {
+			args = args[1:]
+			if strings.LastIndex(args, "\"") == len(args)-1 {
+				args = args[:len(args)-1]
+			}
 		}
 	}
 

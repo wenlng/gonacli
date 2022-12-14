@@ -9,7 +9,7 @@ func genWgAddonDataCode() string {
 	return `
 //---------- genWgAddonArg ----------
 typedef struct {
-  int type; // [1]char [2]int [3]float [4]double [5]bool [6]byte
+  int type; // [1]char [2]int [3]float [4]double [5]bool
   int len;
   void* value;
 } WgAddonArgInfo;`
@@ -18,8 +18,16 @@ typedef struct {
 func genBuildGoStringCode() string {
 	return `
 //---------- genBuildGoString ----------
-GoString _buildGoString(const char* p, size_t n){
+GoString wg_build_go_string(const char* p, size_t n){
   return {p, static_cast<ptrdiff_t>(n)};
+}`
+}
+
+func genBuildGoSliceCode() string {
+	return `
+//---------- genBuildGoString ----------
+GoSlice wg_build_go_slice(void *data, int len, int cap){
+  return { data, len, cap };
 }`
 }
 
@@ -213,6 +221,7 @@ func GenBeforeCode(hasAsync bool) string {
 	code := `// [common]++++++++++++++++++++++++++++++++++++++ start`
 	code += genWgAddonDataCode()
 	//code += genBuildGoStringCode()
+	//code += genBuildGoSliceCode()
 	code += genStringSplitCode()
 	code += genArrayToStringCode()
 	code += genStringToArrayCode()

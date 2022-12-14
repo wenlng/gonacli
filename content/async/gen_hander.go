@@ -40,15 +40,18 @@ func genHandlerArgCode(arg config.Arg, index int) (string, string) {
 		cCode, pCode := argasync.GenAsyncObjectArgTypeCode(arg.Name, sIndex, 2)
 		code += cCode
 		preCode += pCode
-	} else if arg.Type == "arraybuffer" {
-		cCode, pCode := argasync.GenAsyncArrayBufferArgTypeCode(arg.Name, sIndex)
-		code += cCode
-		preCode += pCode
 	} else if arg.Type == "callback" {
 		cCode, pCode := argasync.GenAsyncFuncitonArgTypeCode(arg.Name, sIndex)
 		code += cCode
 		preCode += pCode
 	}
+	/*
+		 else if arg.Type == "arraybuffer" {
+				cCode, pCode := argasync.GenAsyncArrayBufferArgTypeCode(arg.Name, sIndex)
+				code += cCode
+				preCode += pCode
+			}
+	*/
 
 	return code, preCode
 }

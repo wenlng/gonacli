@@ -61,17 +61,20 @@ func GenParseInputArgCode(arg config.Arg, index int) (string, string) {
 		cCode, pCode := GenAsyncObjectInputArgTypeCode(arg.Name, sIndex, 2)
 		code += cCode
 		preCode += pCode
-	} else if arg.Type == "arraybuffer" {
-		validateCode += validate.GenAsyncCheckArrayBufferWithIndexCode(index)
-		cCode, pCode := GenAsyncArrayBufferInputArgTypeCode(arg.Name, sIndex)
-		code += cCode
-		preCode += pCode
 	} else if arg.Type == "callback" {
 		validateCode += validate.GenAsyncCheckFunctionWithIndexCode(index)
 		cCode, pCode := GenAsyncFuncitonInputArgTypeCode(arg.Name, sIndex)
 		code += cCode
 		preCode += pCode
 	}
+	/*
+		 else if arg.Type == "arraybuffer" {
+				validateCode += validate.GenAsyncCheckArrayBufferWithIndexCode(index)
+				cCode, pCode := GenAsyncArrayBufferInputArgTypeCode(arg.Name, sIndex)
+				code += cCode
+				preCode += pCode
+			}
+	*/
 
 	code = genCheckInputArgCode(code, beforeCode, validateCode, index)
 	return code, preCode

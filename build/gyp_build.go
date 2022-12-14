@@ -10,23 +10,21 @@ import (
 )
 
 func MakeToAddon(cfgs config.Config, args string, makeMpn bool) bool {
-	done := true
 
 	path := tools.FormatDirPath(cfgs.OutPut)
 
 	// 检查配置文件
 	if err := check.CheckBaseConfig(cfgs); err != nil {
 		clog.Error(err)
-		done = false
-		return done
+		return false
 	}
 	if c := check.CheckExportApiWithSourceFile(cfgs); !c {
-		done = false
+		return false
 	}
 
 	// 检测是否存在 node_modules 目录
 	if !tools.Exists(filepath.Join(path, "node_modules")) && !makeMpn {
-		clog.Error("Please add \"--npm-i\" args to make for the first time.")
+		clog.Error("When making for the first time, you need to add \"--npm-i\" args install dependencies.")
 		return false
 	}
 
@@ -39,9 +37,11 @@ func MakeToAddon(cfgs config.Config, args string, makeMpn bool) bool {
 
 	if makeMpn {
 		clog.Info("Staring install npm dependencies ...")
+		// "bindings": "^1.5.0",
+		// "node-addon-api": "^5.0.0"
 		msg, err := cmd.RunCommand(
 			"./",
-			"cd "+path+" && npm install",
+			"cd "+path+" && npm install bindings node-addon-api -S",
 		)
 		if err != nil {
 			clog.Error(err)
@@ -63,5 +63,5 @@ func MakeToAddon(cfgs config.Config, args string, makeMpn bool) bool {
 	clog.Info("Make addon done ~")
 	clog.Info(msg)
 
-	return done
+	return true
 }

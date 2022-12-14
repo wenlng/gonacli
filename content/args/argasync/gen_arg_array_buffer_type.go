@@ -5,14 +5,12 @@ import (
 )
 
 func GenAsyncArrayBufferArgTypeCode(name string, index string) (string, string) {
-	//code := `
-	//byte * wg_` + name + ` = (byte *)wg_addon->args[` + index + `];
-	//char * ` + name + ` = (char *)wg_` + name + `;`
+	//char *` + name + ` = new char[wg_` + name + `Info->len];
+	//strcpy(` + name + `, (char *)wg_` + name + `Info->value);
 
 	code := `
   WgAddonArgInfo * wg_` + name + `Info = wg_addon->args[` + index + `];
-  char *` + name + ` = new char[wg_` + name + `Info->len];
-  strcpy(` + name + `, (char *)wg_` + name + `Info->value);`
+  GoSlice ` + name + ` = wg_build_go_slice(wg_` + name + `Info->value, wg_` + name + `Info->len, wg_` + name + `Info->len);`
 
 	//endCode := tools.FormatCodeIndentLn(`delete [] `+name+`;`, 2)
 	endCode := ""
@@ -29,10 +27,10 @@ func GenAsyncArrayBufferInputArgTypeCode(name string, index string) (string, str
   if(!wg_v` + index + `.IsUndefined() && wg_v` + index + `.IsArrayBuffer()){
     wg_` + name + ` = wg_v` + index + `.As<ArrayBuffer>();
   }
-  byte *` + name + ` = (byte *)wg_` + name + `.Data();
+  char *` + name + ` = (char *)wg_` + name + `.Data();
   wg_addon->args[` + index + `] = (WgAddonArgInfo*)malloc(sizeof(*wg_addon->args[` + index + `]));
-  wg_addon->args[` + index + `]->type=6;
-  wg_addon->args[` + index + `]->len=strlen((char *)` + name + `);
+  wg_addon->args[` + index + `]->type=1;
+  wg_addon->args[` + index + `]->len=strlen(` + name + `);
   wg_addon->args[` + index + `]->value=(void *)` + name + `;
   // ---- `
 

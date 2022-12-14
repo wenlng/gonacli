@@ -26,9 +26,19 @@ GONACLI 是一个快速使用 Golang 开发 NodeJS Addon 扩展的开发工具�
 
 - [https://github.com/wenlng/gonacli](https://github.com/wenlng/gonacli)
 
+- QQ交流群号：885267905
+
+## 兼容支持
+- linux / macos
+- nodejs(12.0+)
+- npm(6.0+)
+- node-gyp(9.0+)
+- go(1.13+)
 
 ## 使用 go 方式安装 gonacli 工具
-安装前需要确保系统配置好了 GOPATH 及最终编译保存到 bin 目录的相关环境变量
+<p>安装前需要确保系统配置好了 GOPATH 及最终编译保存到 bin 目录的相关环境变量</p>
+
+linux or Mac OS
 ``` shell
 # .bash_profile
 export GOPATH="/Users/awen/go"
@@ -36,16 +46,29 @@ export GOPATH="/Users/awen/go"
 export PATH="$PATH:$GOPATH:$GOPATH/bin"
 ``` 
 
-安装
+window
+``` shell
+# 系统环境变量设置
+GOPATH: C:\awen\go
+# 配置 bin 目录，使用 golang 方式安装是必须的
+PATH: GOPATH\bin
+``` 
+
+开始安装
+
 ```shell
-$ GOPROXY=https://goproxy.cn/,direct && go install github.com/wenlng/gonacli
+# linux or Mac OS
+$ GOPROXY=https://goproxy.cn/,direct && go install github.com/wenlng/gonacli@latest
+# widow
+ $ set GOPROXY=https://goproxy.cn/,direct && go install github.com/wenlng/gonacli@latest
 $ gonacli version
 ```
 <br/>
 
 ## gonacli 中的命令
 ### 1、generate
-根据 goaddon 的配置生成对应 NodeJS Addon 扩展相关的 Napi、C/C++ 桥接代码
+<p>根据 goaddon 的配置生成对应 NodeJS Addon 扩展相关的 Napi、C/C++ 桥接代码</p>
+
 ``` shell
 # 默认将读取当前目录下的 goaddon.json 配置文件
 $ gonacli generate
@@ -54,7 +77,8 @@ $ gonacli generate
 $ gonacli generate --config demoaddon.json
 ```
 ### 2、build
-相当于 go build -buildmode=c-archive 命令，编译静态库
+<p>相当于 go build -buildmode=c-archive 命令，编译静态库</p>
+
 ``` shell
 # 将 Go CGO 编译生成静态库
 $ gonacli build
@@ -63,11 +87,11 @@ $ gonacli build
 $ gonacli build --args '-ldflags "-s -w"'
 ```
 ### 3、make
-相当于 node-gyp configure && node-gyp build 命令，编译成最终的 NodeJS Addon 扩展
+<p>相当于 node-gyp configure && node-gyp build 命令，编译成最终的 NodeJS Addon 扩展</p>
 
 ``` text
 使用 make 命令请请确保系统已安装了 node-gyp 编译工具
-使用 -npm-i 参数时请确保系统已安装了 NPM 包依赖管理工具
+使用 -npm-i 参数时请确保系统已安装了 npm 包依赖管理工具
 ```
 
 ``` shell
@@ -83,9 +107,11 @@ $ gonacli make
 $ gonacli make --args '--debug'
 ```
 
+
 <br/>
 
-## 快速使用 Golang 开发 NodeJS Addon 的实例
+## Golang 开发 NodeJS Addon 的 Demo
+
 <p>Tip：确保相关命令能正常使用</p>
 
 ``` shell
@@ -227,7 +253,6 @@ $ node ./test.js
 |   string    |   *C.char   |    *C.char     |   string    |
 |    array    |   *C.char   |    *C.char     |    Array    |
 |   object    |   *C.char   |    *C.char     |   Object    |
-| arraybuffer |   *C.char   | unsafe.Pointer | ArrayBuffer |
 |  callback   |   *C.char   |       -        |  Function   |
 
 ### 配置文件的 returntype 字段类型

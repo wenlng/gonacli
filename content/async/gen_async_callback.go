@@ -46,11 +46,14 @@ func genResultParseCode(returnType string) (string, string) {
 		code += reasync.GenAsyncReturnArrayTypeCode()
 	} else if returnType == "object" {
 		code += reasync.GenAsyncReturnObjectTypeCode()
-	} else if returnType == "arraybuffer" {
-		code += reasync.GenAsyncReturnArrayBufferTypeCode()
 	} else {
 		code = tools.FormatCodeIndentLn(`(void)data;`, 2)
 	}
+	/*
+		 else if returnType == "arraybuffer" {
+				code += reasync.GenAsyncReturnArrayBufferTypeCode()
+			}
+	*/
 
 	return code, preCode
 }

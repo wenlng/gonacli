@@ -1,5 +1,6 @@
 #include <napi.h>
 #include <string>
+#include <assert.h>
 #include <functional>
 
 #include "goaddon.h"
@@ -11,7 +12,7 @@ using namespace std;
 // [common]++++++++++++++++++++++++++++++++++++++ start
 //---------- genWgAddonArg ----------
 typedef struct {
-  int type; // [1]char [2]int [3]float [4]double [5]bool [6]byte
+  int type; // [1]char [2]int [3]float [4]double [5]bool
   int len;
   void* value;
 } WgAddonArgInfo;
@@ -468,57 +469,6 @@ Value _IsSliceType(const CallbackInfo& wg_info) {
   return Boolean::New(wg_env, wg_res_);
 }
 // ---------- GenCode ---------- 
-Value _FilterArrayBuffer(const CallbackInfo& wg_info) {
-  Env wg_env = wg_info.Env();
-  if(wg_info.Length() > 0 && !wg_info[0].IsArrayBuffer()){
-    TypeError::New(wg_env, "The 1 parameter must be of array buffer!").ThrowAsJavaScriptException();
-    return wg_env.Null();
-  }
-  ArrayBuffer wg__s = ArrayBuffer();
-  if (wg_info.Length() > 0) {
-    wg__s = wg_info[0].As<ArrayBuffer>();
-  }
-  byte * wg_s = (byte *)wg__s.Data();
-  char * s = (char *)wg_s;
-  void * wg_res_ = FilterArrayBuffer(s);
-  byte *wg_ab = (byte*) wg_res_;
-  size_t wg_ab_length = strlen((char *)wg_ab);
-  ArrayBuffer wg_arr_buffer = ArrayBuffer::New(wg_env, wg_ab, wg_ab_length);
-  return wg_arr_buffer;
-}
-// ---------- GenCode ---------- 
-Value _CountArrayBuffer(const CallbackInfo& wg_info) {
-  Env wg_env = wg_info.Env();
-  if(wg_info.Length() > 0 && !wg_info[0].IsArrayBuffer()){
-    TypeError::New(wg_env, "The 1 parameter must be of array buffer!").ThrowAsJavaScriptException();
-    return wg_env.Null();
-  }
-  ArrayBuffer wg__s = ArrayBuffer();
-  if (wg_info.Length() > 0) {
-    wg__s = wg_info[0].As<ArrayBuffer>();
-  }
-  byte * wg_s = (byte *)wg__s.Data();
-  char * s = (char *)wg_s;
-  int wg_res_ = CountArrayBuffer(s);
-  return Number::New(wg_env, wg_res_);
-}
-// ---------- GenCode ---------- 
-Value _IsArrayBufferType(const CallbackInfo& wg_info) {
-  Env wg_env = wg_info.Env();
-  if(wg_info.Length() > 0 && !wg_info[0].IsArrayBuffer()){
-    TypeError::New(wg_env, "The 1 parameter must be of array buffer!").ThrowAsJavaScriptException();
-    return wg_env.Null();
-  }
-  ArrayBuffer wg__s = ArrayBuffer();
-  if (wg_info.Length() > 0) {
-    wg__s = wg_info[0].As<ArrayBuffer>();
-  }
-  byte * wg_s = (byte *)wg__s.Data();
-  char * s = (char *)wg_s;
-  bool wg_res_ = IsArrayBufferType(s);
-  return Boolean::New(wg_env, wg_res_);
-}
-// ---------- GenCode ---------- 
 Value _SyncCallbackSleep(const CallbackInfo& wg_info) {
   Env wg_env = wg_info.Env();
   if(wg_info.Length() > 0 && !wg_info[0].IsNumber()){
@@ -592,7 +542,7 @@ static void wg_work_complete_asynccallbackrestr(napi_env wg_env, napi_status wg_
 static napi_value wg_work_asynccallbackrestr(napi_env wg_env, napi_callback_info wg_info) {
   size_t wg_argc = 2;
   size_t wg_cb_arg_index = 1;
-  napi_value wg_args[wg_argc];
+  napi_value wg_args[2];
   napi_value wg_work_name;
   napi_status wg_sts;
   WgAddonDataASyncCallbackReStr* wg_addon = (WgAddonDataASyncCallbackReStr*)malloc(sizeof(*wg_addon));
@@ -929,132 +879,6 @@ void register_asynccallbackrearr(Env env, Object exports){
   napi_define_properties(env, exports, 1, &desc);
 }
 // [ASyncCallbackReArr]+++++++++++++++++++++++++++++++++ end
-// [ASyncCallbackReArrBuffer] +++++++++++++++++++++++++++++++++ start
-typedef struct{
-  napi_async_work work;
-  napi_threadsafe_function tsfn;
-  int argc;
-  WgAddonArgInfo *args[2];
-} WgAddonDataASyncCallbackReArrBuffer;
-// ------------ genJsCallbackCode
-static void wg_js_callback_asynccallbackrearrbuffer(napi_env wg_env, napi_value wg_js_cb, void* wg_context, void* wg_data) {
-  (void)wg_context;
-  const void* wg_res_ = (void*)wg_data;
-  if (wg_env != NULL) {
-    byte *wg_ab = (byte*) wg_res_;
-    size_t wg_ab_length = strlen((char *)wg_ab);
-    ArrayBuffer wg_arr_buffer = ArrayBuffer::New(wg_env, wg_ab, wg_ab_length);
-    napi_value wg_argv[] = { wg_arr_buffer };
-    napi_value wg_global;
-	napi_get_global(wg_env, &wg_global);
-    wg_catch_err(wg_env, napi_call_function(wg_env, wg_global, wg_js_cb, 1, wg_argv, NULL));
-  }
-}
-// -------- genExecuteworkCode
-static void wg_execute_workasynccallbackrearrbuffer(napi_env wg_env, void* wg_data) {
-  WgAddonDataASyncCallbackReArrBuffer* wg_addon = (WgAddonDataASyncCallbackReArrBuffer*)wg_data;
-  wg_catch_err(wg_env, napi_acquire_threadsafe_function(wg_addon->tsfn));
-  WgAddonArgInfo * wg_sInfo = wg_addon->args[0];
-  char *s = new char[wg_sInfo->len];
-  strcpy(s, (char *)wg_sInfo->value);
-  // arg - cb
-  WgAddonArgInfo * wg_cbInfo = wg_addon->args[1];
-  char * cb = new char[wg_cbInfo->len];
-  strcpy(cb, (char *)wg_cbInfo->value);
-  // ---- 
-  // -------- genHandlerCode
-  const void* wg_res_ = ASyncCallbackReArrBuffer(s,cb);
-  wg_catch_err(wg_env, napi_call_threadsafe_function(wg_addon->tsfn, (void*)(wg_res_), napi_tsfn_blocking));
-  wg_catch_err(wg_env, napi_release_threadsafe_function(wg_addon->tsfn, napi_tsfn_release));
-  delete [] cb;
-}
-// -------- genworkThreadCompleteCode
-static void wg_work_complete_asynccallbackrearrbuffer(napi_env wg_env, napi_status wg_status, void* wg_data) {
-  WgAddonDataASyncCallbackReArrBuffer* wg_addon = (WgAddonDataASyncCallbackReArrBuffer*)wg_data;
-  wg_catch_err(wg_env, napi_release_threadsafe_function(wg_addon->tsfn, napi_tsfn_release));
-  wg_catch_err(wg_env, napi_delete_async_work(wg_env, wg_addon->work));
-  wg_addon->work = NULL;
-  wg_addon->tsfn = NULL;
-  for (int i = 0; i < wg_addon->argc; i++) {
-    if (wg_addon->args[i]->type == 1) {
-      WgAddonArgInfo* info = (WgAddonArgInfo*)wg_addon->args[i];
-      delete [] (char *)info->value;
-    }
-    free(wg_addon->args[i]);
-    wg_addon->args[i] = NULL;
-  }
-}
-// ---------- genworkThreadCode
-static napi_value wg_work_asynccallbackrearrbuffer(napi_env wg_env, napi_callback_info wg_info) {
-  size_t wg_argc = 2;
-  size_t wg_cb_arg_index = 1;
-  napi_value wg_args[wg_argc];
-  napi_value wg_work_name;
-  napi_status wg_sts;
-  WgAddonDataASyncCallbackReArrBuffer* wg_addon = (WgAddonDataASyncCallbackReArrBuffer*)malloc(sizeof(*wg_addon));
-  wg_addon->work = NULL;
-  wg_addon->argc = wg_argc;
-  wg_sts = napi_get_cb_info(wg_env, wg_info, &wg_argc, wg_args, NULL, NULL);
-  wg_catch_err(wg_env, wg_sts);
-  napi_value wg_js_cb = wg_args[wg_cb_arg_index];
-  Value wg_v0 = Value(wg_env, wg_args[0]);
-  if(!wg_v0.IsUndefined() && !wg_v0.IsArrayBuffer()){
-    TypeError::New(wg_env, "The 1 parameter must be of array buffer!").ThrowAsJavaScriptException();
-    return NULL;
-  }
-  // arg - s
-  ArrayBuffer wg_s = ArrayBuffer();
-  if(!wg_v0.IsUndefined() && wg_v0.IsArrayBuffer()){
-    wg_s = wg_v0.As<ArrayBuffer>();
-  }
-  byte *s = (byte *)wg_s.Data();
-  wg_addon->args[0] = (WgAddonArgInfo*)malloc(sizeof(*wg_addon->args[0]));
-  wg_addon->args[0]->type=6;
-  wg_addon->args[0]->len=strlen((char *)s);
-  wg_addon->args[0]->value=(void *)s;
-  // ---- 
-  Value wg_v1 = Value(wg_env, wg_args[1]);
-  if(wg_v1.IsUndefined()){
-    TypeError::New(wg_env, "The 2 parameter must be passed!").ThrowAsJavaScriptException();
-    return NULL;
-  }
-  if(!wg_v1.IsUndefined() && !wg_v1.IsFunction()){
-    TypeError::New(wg_env, "The 2 parameter must be of function!").ThrowAsJavaScriptException();
-    return NULL;
-  }
-  // arg - cb
-  string wg__cb = "cb(){}";
-  if(!wg_v1.IsUndefined() && wg_v1.IsFunction()){
-    wg__cb = wg_v1.ToString();
-    size_t pos = wg__cb.find("{");
-    if (pos > 0) {
-      wg__cb = wg__cb.substr(0, pos);
-      wg__cb += "{}";
-    }
-  }
-  char * cb = new char[wg__cb.length() + 1];
-  strcpy(cb, wg__cb.c_str());
-  wg_addon->args[1] = (WgAddonArgInfo*)malloc(sizeof(*wg_addon->args[1]));
-  wg_addon->args[1]->type=1;
-  wg_addon->args[1]->len=wg__cb.length() + 1;
-  wg_addon->args[1]->value=(void *)cb;
-  // ---- 
-  assert(wg_addon->work == NULL && "Only one work item must exist at a time");
-  wg_catch_err(wg_env, napi_create_string_utf8(wg_env, "N-API Thread-safe Call from Async Work Item", NAPI_AUTO_LENGTH, &wg_work_name));
-  wg_sts = napi_create_threadsafe_function(wg_env, wg_js_cb, NULL, wg_work_name, 0, 1, NULL, NULL, NULL, wg_js_callback_asynccallbackrearrbuffer, &(wg_addon->tsfn));
-  wg_catch_err(wg_env, wg_sts);
-  wg_sts = napi_create_async_work(wg_env, NULL, wg_work_name, wg_execute_workasynccallbackrearrbuffer, wg_work_complete_asynccallbackrearrbuffer, wg_addon, &(wg_addon->work));
-  wg_catch_err(wg_env, wg_sts);
-  wg_sts = napi_queue_async_work(wg_env, wg_addon->work);
-  wg_catch_err(wg_env, wg_sts);
-  return NULL;
-}
-// ---------- GenRegisterAsyncCode ---------- 
-void register_asynccallbackrearrbuffer(Env env, Object exports){
-  napi_property_descriptor desc = {"async_callback_re_arr_buffer",NULL,wg_work_asynccallbackrearrbuffer,NULL,NULL,NULL,napi_default,NULL};
-  napi_define_properties(env, exports, 1, &desc);
-}
-// [ASyncCallbackReArrBuffer]+++++++++++++++++++++++++++++++++ end
 // [ASyncCallbackReObject] +++++++++++++++++++++++++++++++++ start
 typedef struct{
   napi_async_work work;
@@ -1471,15 +1295,18 @@ static void wg_execute_workasynccallbackmarg(napi_env wg_env, void* wg_data) {
   char * cb = new char[wg_cbInfo->len];
   strcpy(cb, (char *)wg_cbInfo->value);
   // ---- 
+  // arg - arrb
   WgAddonArgInfo * wg_arrbInfo = wg_addon->args[2];
-  char *arrb = new char[wg_arrbInfo->len];
+  char * arrb = new char[wg_arrbInfo->len];
   strcpy(arrb, (char *)wg_arrbInfo->value);
+  // ---- 
   // -------- genHandlerCode
   const bool wg_res_ = ASyncCallbackMArg(str,cb,arrb);
   wg_catch_err(wg_env, napi_call_threadsafe_function(wg_addon->tsfn, (void*)(wg_res_), napi_tsfn_blocking));
   wg_catch_err(wg_env, napi_release_threadsafe_function(wg_addon->tsfn, napi_tsfn_release));
   delete [] str;
   delete [] cb;
+  delete [] arrb;
 }
 // -------- genworkThreadCompleteCode
 static void wg_work_complete_asynccallbackmarg(napi_env wg_env, napi_status wg_status, void* wg_data) {
@@ -1558,19 +1385,20 @@ static napi_value wg_work_asynccallbackmarg(napi_env wg_env, napi_callback_info 
   wg_addon->args[1]->value=(void *)cb;
   // ---- 
   Value wg_v2 = Value(wg_env, wg_args[2]);
-  if(!wg_v2.IsUndefined() && !wg_v2.IsArrayBuffer()){
-    TypeError::New(wg_env, "The 3 parameter must be of array buffer!").ThrowAsJavaScriptException();
+  if(!wg_v2.IsUndefined() && !wg_v2.IsString()){
+    TypeError::New(wg_env, "The 3 parameter must be of string!").ThrowAsJavaScriptException();
     return NULL;
   }
   // arg - arrb
-  ArrayBuffer wg_arrb = ArrayBuffer();
-  if(!wg_v2.IsUndefined() && wg_v2.IsArrayBuffer()){
-    wg_arrb = wg_v2.As<ArrayBuffer>();
+  string wg_arrb = "";
+  if(!wg_v2.IsUndefined() && wg_v2.IsString()){
+    wg_arrb = wg_v2.As<String>().Utf8Value();
   }
-  byte *arrb = (byte *)wg_arrb.Data();
+  char *arrb = new char[wg_arrb.length() + 1];
+  strcpy(arrb, wg_arrb.c_str());
   wg_addon->args[2] = (WgAddonArgInfo*)malloc(sizeof(*wg_addon->args[2]));
-  wg_addon->args[2]->type=6;
-  wg_addon->args[2]->len=strlen((char *)arrb);
+  wg_addon->args[2]->type=1;
+  wg_addon->args[2]->len=wg_arrb.length() + 1;
   wg_addon->args[2]->value=(void *)arrb;
   // ---- 
   assert(wg_addon->work == NULL && "Only one work item must exist at a time");
@@ -1604,14 +1432,10 @@ Object Init(Env env, Object exports) {
   exports.Set(String::New(env, "filter_slice"), Function::New(env, _FilterSlice));
   exports.Set(String::New(env, "count_slice"), Function::New(env, _CountSlice));
   exports.Set(String::New(env, "is_slice_type"), Function::New(env, _IsSliceType));
-  exports.Set(String::New(env, "filter_array_buffer"), Function::New(env, _FilterArrayBuffer));
-  exports.Set(String::New(env, "count_array_buffer"), Function::New(env, _CountArrayBuffer));
-  exports.Set(String::New(env, "is_array_buffer"), Function::New(env, _IsArrayBufferType));
   exports.Set(String::New(env, "async_callback_sleep"), Function::New(env, _SyncCallbackSleep));
   register_asynccallbackrestr(env, exports);
   register_asynccallbackreuintsum32(env, exports);
   register_asynccallbackrearr(env, exports);
-  register_asynccallbackrearrbuffer(env, exports);
   register_asynccallbackreobject(env, exports);
   register_asynccallbackrecount(env, exports);
   register_asynccallbackrebool(env, exports);

@@ -4,6 +4,7 @@ package base
 func GenHeaderFileCode(headerFile string) string {
 	var code = `#include <napi.h>
 #include <string>
+#include <assert.h>
 #include <functional>
 `
 	code += `

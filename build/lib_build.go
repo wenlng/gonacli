@@ -12,18 +12,17 @@ import (
 
 func BuildGoToLibrary(cfgs config.Config, args string) bool {
 
-	done := true
 	// 检查配置文件
 	if err := check.CheckBaseConfig(cfgs); err != nil {
 		clog.Error(err)
-		done = false
+		return false
 	}
 	if err := check.CheckAsyncCorrectnessConfig(cfgs); err != nil {
 		clog.Error(err)
-		done = false
+		return false
 	}
 	if c := check.CheckExportApiWithSourceFile(cfgs); !c {
-		done = false
+		return false
 	}
 
 	libName := cfgs.Name + ".a"
@@ -40,10 +39,10 @@ func BuildGoToLibrary(cfgs config.Config, args string) bool {
 	clog.Info("Start build library ...")
 	sourceFiles := genBuildFile(cfgs)
 	if d := buildGoToLibrary(sourceFiles, libName, outputDir, args); !d {
-		done = false
+		return false
 	}
 
-	return done
+	return true
 }
 
 // 生成 build go 文件集合

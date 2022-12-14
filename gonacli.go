@@ -4,7 +4,7 @@ import "github.com/wenlng/gonacli/cli"
 
 const (
 	Name    = "goncali"
-	Version = "v1.0.6"
+	Version = "v1.0.7"
 )
 
 func main() {

@@ -21,8 +21,10 @@ func CheckBaseConfig(config config.Config) error {
 
 	var goApiList = make([]string, 0)
 	var JsCallApiList = make([]string, 0)
-	var allowArgsList = []string{"int", "int32", "int64", "uint32", "float", "double", "boolean", "string", "array", "object", "arraybuffer", "callback"}
-	var returnAllowArgsList = []string{"int", "int32", "int64", "uint32", "float", "double", "boolean", "string", "array", "arraybuffer", "object"}
+	// "arraybuffer",
+	var allowArgsList = []string{"int", "int32", "int64", "uint32", "float", "double", "boolean", "string", "array", "object", "callback"}
+	// "arraybuffer",
+	var returnAllowArgsList = []string{"int", "int32", "int64", "uint32", "float", "double", "boolean", "string", "array", "object"}
 
 	for _, export := range exports {
 		// 正在检测导出的 Go API、JS CALL API 是否重复

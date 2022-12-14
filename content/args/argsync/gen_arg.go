@@ -66,13 +66,16 @@ func GenArgCode(args []config.Arg) (string, []string, string) {
 			mCode += sCode
 			endCode += eCode
 			argNames = append(argNames, arg.Name)
-		} else if arg.Type == "arraybuffer" {
-			code += validate.GenCheckArrayBufferWithIndexCode(index)
-			sCode, eCode := GenArrayBufferArgTypeCode(arg.Name, sIndex)
-			mCode += sCode
-			endCode += eCode
-			argNames = append(argNames, arg.Name)
 		}
+		/*
+			 else if arg.Type == "arraybuffer" {
+					code += validate.GenCheckArrayBufferWithIndexCode(index)
+					sCode, eCode := GenArrayBufferArgTypeCode(arg.Name, sIndex)
+					mCode += sCode
+					endCode += eCode
+					argNames = append(argNames, arg.Name)
+				}
+		*/
 	}
 
 	code = beforeCode + code + mCode

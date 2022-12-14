@@ -27,8 +27,17 @@ GONACLI is a development tool that quickly uses Golang to develop NodeJS Addon. 
 
 <br/>
 
+## Compatible Support
+- linux / macos
+- nodejs(12.0+)
+- npm(6.0+)
+- node-gyp(9.0+)
+- go(1.13+)
+
 ## Use Golang Install
-Ensure that the system is configured with GOPATH environment variables before installation
+<p>Ensure that the system is configured with GOPATH environment variables before installation</p>
+
+linux or Mac OS
 ``` shell
 # .bash_profile
 export GOPATH="/Users/awen/go"
@@ -36,16 +45,24 @@ export GOPATH="/Users/awen/go"
 export PATH="$PATH:$GOPATH:$GOPATH/bin"
 ```
 
+window
+``` shell
+# set system path
+GOPATH: C:\awen\go
+# set bin dir
+PATH: GOPATH\bin
+``` 
+
 Install
 ``` shell
-$ go install github.com/wenlng/gonacli
+$ go install github.com/wenlng/gonacli@latest
 $ gonacli version
 ```
 <br/>
 
 ## Gonacli Command
 ### 1. generate
-Generate Napi, C/C++ bridge code related to NodeJS Addon extension according to the configuration of goaddon
+Generate Napi, C/C++ bridge code related to NodeJS Addon according to the configuration of goaddon
 ``` shell
 # By default, it reads the goaddon in the current directory Json configuration file
 $ gonacli generate
@@ -54,7 +71,8 @@ $ gonacli generate
 $ gonacli generate --config demoaddon.json
 ```
 ### 2. build
-Same as the "go build - buildmode=c-archive" command, compile the library
+<p>Same as the "go build - buildmode=c-archive" command, compile the library</p>
+
 ``` shell
 # Compile to generate library
 $ gonacli build
@@ -63,12 +81,13 @@ $ gonacli build
 $ gonacli build --args '-ldflags "-s -w"'
 ```
 ### 3. make
-Same as the "node-gyp configure && node-gyp build" command，Compile NodeJS Addon
+<p>Same as the "node-gyp configure && node-gyp build" command，Compile NodeJS Addon</p>
+
 
 ``` text
 Please ensure that the node gyp compiler has been installed on the system before using the "make" command
 
-Before using the "--npm-i" arg, ensure that the system has installed the NPM package dependency management tool
+Before using the "--npm-i" arg, ensure that the system has installed the npm package dependency management tool
 ```
 
 ``` shell
@@ -85,7 +104,7 @@ $ gonacli make --args '--debug'
 
 <br/>
 
-## Quickly use Golang to develop an instance of NodeJS Addon
+## Use Golang to develop an demo of NodeJS Addon
 <p>Tip：Ensure that relevant commands can be used normally</p>
 
 ``` shell
@@ -226,7 +245,6 @@ $ node ./test.js
 |   string    |   *C.char   |    *C.char     |   string    |
 |    array    |   *C.char   |    *C.char     |    Array    |
 |   object    |   *C.char   |    *C.char     |   Object    |
-| arraybuffer |   *C.char   | unsafe.Pointer | ArrayBuffer |
 |  callback   |   *C.char   |       -        |  Function   |
 
 ### The returntype field type of the configuration file

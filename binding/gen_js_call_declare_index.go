@@ -14,8 +14,11 @@ func GenJsCallDeclareIndexFile(cfgs config.Config, indexDTsName string) bool {
 	return true
 }
 
-var allowArgsList = []string{"int", "int32", "int64", "uint32", "float", "double", "boolean", "string", "array", "object", "arraybuffer", "callback"}
-var mapDeclareList = []string{"number", "number", "number", "number", "number", "number", "boolean", "string", "Array<any>", "object", "ArrayBuffer", "any"}
+// "arraybuffer",
+var allowArgsList = []string{"int", "int32", "int64", "uint32", "float", "double", "boolean", "string", "array", "object", "callback"}
+
+// "ArrayBuffer",
+var mapDeclareList = []string{"number", "number", "number", "number", "number", "number", "boolean", "string", "Array<any>", "object", "any"}
 
 func genJsCallApiListDeclareCode(exports []config.Export, name string) string {
 	codeList := make([]string, 0)

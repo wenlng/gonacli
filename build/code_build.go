@@ -11,15 +11,13 @@ import (
 )
 
 func GenerateAddonBridge(cfgs config.Config) bool {
-	done := true
 	// 检查配置文件
 	if err := check.CheckBaseConfig(cfgs); err != nil {
 		clog.Error(err)
-		done = false
-		return done
+		return false
 	}
 	if c := check.CheckExportApiWithSourceFile(cfgs); !c {
-		done = false
+		return false
 	}
 
 	cppName := cfgs.Name + ".cc"
@@ -42,28 +40,28 @@ func GenerateAddonBridge(cfgs config.Config) bool {
 
 	// 生成 addon c/c++ 代码
 	if g := content.GenCode(cfgs, cppName); !g {
-		done = false
+		return false
 	}
 
 	// 生成 node-gyp 编译配置文件
 	if y := binding.GenGypFile(cfgs, bindingName); !y {
-		done = false
+		return false
 	}
 
 	// 生成 js call api to index.js
 	if i := binding.GenJsCallIndexFile(cfgs, indexJsName); !i {
-		done = false
+		return false
 	}
 
 	// 生成 js call api to index.d.t
 	if t := binding.GenJsCallDeclareIndexFile(cfgs, indexDTsName); !t {
-		done = false
+		return false
 	}
 
 	// 生成 npm package 包模板文件
 	if p := binding.GenPackageFile(cfgs, packageName); !p {
-		done = false
+		return false
 	}
 
-	return done
+	return true
 }

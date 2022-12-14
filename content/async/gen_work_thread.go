@@ -37,7 +37,7 @@ func genWorkThreadCode(
 static napi_value ` + workName + `(napi_env wg_env, napi_callback_info wg_info) {
   size_t wg_argc = ` + fmt.Sprintf("%d", argc) + `;
   size_t wg_cb_arg_index = ` + fmt.Sprintf("%d", cbArgIndex) + `;
-  napi_value wg_args[wg_argc];
+  napi_value wg_args[` + fmt.Sprintf("%d", argc) + `];
   napi_value wg_work_name;
   napi_status wg_sts;
   ` + structDataName + `* wg_addon = (` + structDataName + `*)malloc(sizeof(*wg_addon));

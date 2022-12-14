@@ -44,7 +44,7 @@ func (cli *CLI) Run(name string, version string) {
 	// gonacli build --config xxx.json
 	buildCofig := buildCmd.String("config", "goaddon.json", "Addon api export configuration file")
 	// gonacli build --args '-ldflags "-s -w"'
-	buildArg := buildCmd.String("args", "'-ldflags \"-s -w\"'", "Golang compilation arguments")
+	buildArg := buildCmd.String("args", "-ldflags=\"-s -w\"", "Golang compilation arguments")
 	// gonacli build --upx
 	//buildUpx := buildCmd.Bool("upx", false, "Call the upx compression command")
 	// gonacli build --xgo

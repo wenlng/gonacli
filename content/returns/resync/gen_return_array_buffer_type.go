@@ -12,8 +12,8 @@ func GenHandleReturnArrayBufferCode(method string, args []string, preCode string
 	// 转换成数组buffer
 	code := `
   void * wg_res_ = ` + method + `(` + strings.Join(args, ",") + `);
-  byte *wg_ab = (byte*) wg_res_;
-  size_t wg_ab_length = strlen((char *)wg_ab);
+  char *wg_ab = (char*) wg_res_;
+  size_t wg_ab_length = strlen(wg_ab);
   ArrayBuffer wg_arr_buffer = ArrayBuffer::New(wg_env, wg_ab, wg_ab_length);`
 
 	code += preCode

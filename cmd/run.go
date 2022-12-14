@@ -31,7 +31,7 @@ func RunCommand(path string, exec string) (msg string, err error) {
 	cmdArg := "-c"
 	if tools.IsWindowsOs() {
 		cmdName = "cmd"
-		cmdArg = "/C"
+		cmdArg = "/c"
 	}
 
 	msg, err = runCommand(path, cmdName, cmdArg, exec)
