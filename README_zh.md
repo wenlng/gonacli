@@ -26,14 +26,15 @@ GONACLI 是一个快速使用 Golang 开发 NodeJS Addon 扩展的开发工具�
 
 - [https://github.com/wenlng/gonacli](https://github.com/wenlng/gonacli)
 
-- QQ交流群号：885267905
+- QQ交流群1：885267905
 
 ## 兼容支持
+- windows (正在支持)
 - linux / macos
 - nodejs(12.0+)
 - npm(6.0+)
 - node-gyp(9.0+)
-- go(1.13+)
+- go(1.14+)
 
 ## 使用 go 方式安装 gonacli 工具
 <p>安装前需要确保系统配置好了 GOPATH 及最终编译保存到 bin 目录的相关环境变量</p>

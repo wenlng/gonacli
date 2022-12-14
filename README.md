@@ -29,10 +29,11 @@ GONACLI is a development tool that quickly uses Golang to develop NodeJS Addon. 
 
 ## Compatible Support
 - linux / macos
+- linux / macos
 - nodejs(12.0+)
 - npm(6.0+)
 - node-gyp(9.0+)
-- go(1.13+)
+- go(1.14+)
 
 ## Use Golang Install
 <p>Ensure that the system is configured with GOPATH environment variables before installation</p>
