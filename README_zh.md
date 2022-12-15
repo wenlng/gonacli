@@ -26,7 +26,7 @@
 
 - [https://github.com/wenlng/gonacli](https://github.com/wenlng/gonacli)
 
-- Gonacli QQ群(技术支持)：885267905
+- Gonacli QQ群(技术交流)：885267905
 
 ## Gonacli 的兼容支持
 - Linux
