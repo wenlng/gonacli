@@ -1,4 +1,5 @@
 const goaddon = require('bindings')('goaddon');
+// JS call API
 module.exports = { 
   intSum32 : goaddon.int_sum32,
   intSum64 : goaddon.int_sum64,

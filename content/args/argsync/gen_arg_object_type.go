@@ -13,6 +13,7 @@ func GenObjectArgTypeCode(name string, index string) (string, string) {
   string wg_` + name + ` = wg_object_to_string(wg__` + name + `);
   char *` + name + ` = new char[wg_` + name + `.length() + 1];
   strcpy(` + name + `, wg_` + name + `.c_str());`
+
 	endCode := tools.FormatCodeIndentLn(`delete [] `+name+`;`, 2)
 	return code, endCode
 }

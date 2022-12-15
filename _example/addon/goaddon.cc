@@ -360,6 +360,7 @@ Value _EmptyString(const CallbackInfo& wg_info) {
   char *s = new char[wg_s.length() + 1];
   strcpy(s, wg_s.c_str());
   bool wg_res_ = EmptyString(s);
+  delete [] s;
   return Boolean::New(wg_env, wg_res_);
 }
 // ---------- GenCode ---------- 
@@ -396,6 +397,7 @@ Value _CountMap(const CallbackInfo& wg_info) {
   char *obj = new char[wg_obj.length() + 1];
   strcpy(obj, wg_obj.c_str());
   int wg_res_ = CountMap(obj);
+  delete [] obj;
   return Number::New(wg_env, wg_res_);
 }
 // ---------- GenCode ---------- 
@@ -413,6 +415,7 @@ Value _IsMapType(const CallbackInfo& wg_info) {
   char *obj = new char[wg_obj.length() + 1];
   strcpy(obj, wg_obj.c_str());
   bool wg_res_ = IsMapType(obj);
+  delete [] obj;
   return Boolean::New(wg_env, wg_res_);
 }
 // ---------- GenCode ---------- 
@@ -449,6 +452,7 @@ Value _CountSlice(const CallbackInfo& wg_info) {
   char *s = new char[wg_s.length() + 1];
   strcpy(s, wg_s.c_str());
   int wg_res_ = CountSlice(s);
+  delete [] s;
   return Number::New(wg_env, wg_res_);
 }
 // ---------- GenCode ---------- 
@@ -466,6 +470,7 @@ Value _IsSliceType(const CallbackInfo& wg_info) {
   char *s = new char[wg_s.length() + 1];
   strcpy(s, wg_s.c_str());
   bool wg_res_ = IsSliceType(s);
+  delete [] s;
   return Boolean::New(wg_env, wg_res_);
 }
 // ---------- GenCode ---------- 
@@ -673,7 +678,7 @@ static void wg_work_complete_asynccallbackreuintsum32(napi_env wg_env, napi_stat
 static napi_value wg_work_asynccallbackreuintsum32(napi_env wg_env, napi_callback_info wg_info) {
   size_t wg_argc = 3;
   size_t wg_cb_arg_index = 2;
-  napi_value wg_args[wg_argc];
+  napi_value wg_args[3];
   napi_value wg_work_name;
   napi_status wg_sts;
   WgAddonDataASyncCallbackReUintSum32* wg_addon = (WgAddonDataASyncCallbackReUintSum32*)malloc(sizeof(*wg_addon));
@@ -810,7 +815,7 @@ static void wg_work_complete_asynccallbackrearr(napi_env wg_env, napi_status wg_
 static napi_value wg_work_asynccallbackrearr(napi_env wg_env, napi_callback_info wg_info) {
   size_t wg_argc = 2;
   size_t wg_cb_arg_index = 1;
-  napi_value wg_args[wg_argc];
+  napi_value wg_args[2];
   napi_value wg_work_name;
   napi_status wg_sts;
   WgAddonDataASyncCallbackReArr* wg_addon = (WgAddonDataASyncCallbackReArr*)malloc(sizeof(*wg_addon));
@@ -936,7 +941,7 @@ static void wg_work_complete_asynccallbackreobject(napi_env wg_env, napi_status 
 static napi_value wg_work_asynccallbackreobject(napi_env wg_env, napi_callback_info wg_info) {
   size_t wg_argc = 2;
   size_t wg_cb_arg_index = 1;
-  napi_value wg_args[wg_argc];
+  napi_value wg_args[2];
   napi_value wg_work_name;
   napi_status wg_sts;
   WgAddonDataASyncCallbackReObject* wg_addon = (WgAddonDataASyncCallbackReObject*)malloc(sizeof(*wg_addon));
@@ -1066,7 +1071,7 @@ static void wg_work_complete_asynccallbackrecount(napi_env wg_env, napi_status w
 static napi_value wg_work_asynccallbackrecount(napi_env wg_env, napi_callback_info wg_info) {
   size_t wg_argc = 2;
   size_t wg_cb_arg_index = 1;
-  napi_value wg_args[wg_argc];
+  napi_value wg_args[2];
   napi_value wg_work_name;
   napi_status wg_sts;
   WgAddonDataASyncCallbackReCount* wg_addon = (WgAddonDataASyncCallbackReCount*)malloc(sizeof(*wg_addon));
@@ -1194,7 +1199,7 @@ static void wg_work_complete_asynccallbackrebool(napi_env wg_env, napi_status wg
 static napi_value wg_work_asynccallbackrebool(napi_env wg_env, napi_callback_info wg_info) {
   size_t wg_argc = 2;
   size_t wg_cb_arg_index = 1;
-  napi_value wg_args[wg_argc];
+  napi_value wg_args[2];
   napi_value wg_work_name;
   napi_status wg_sts;
   WgAddonDataASyncCallbackReBool* wg_addon = (WgAddonDataASyncCallbackReBool*)malloc(sizeof(*wg_addon));
@@ -1328,7 +1333,7 @@ static void wg_work_complete_asynccallbackmarg(napi_env wg_env, napi_status wg_s
 static napi_value wg_work_asynccallbackmarg(napi_env wg_env, napi_callback_info wg_info) {
   size_t wg_argc = 3;
   size_t wg_cb_arg_index = 1;
-  napi_value wg_args[wg_argc];
+  napi_value wg_args[3];
   napi_value wg_work_name;
   napi_status wg_sts;
   WgAddonDataASyncCallbackMArg* wg_addon = (WgAddonDataASyncCallbackMArg*)malloc(sizeof(*wg_addon));

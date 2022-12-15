@@ -2,13 +2,13 @@ package resync
 
 import (
 	"github.com/wenlng/gonacli/config"
-	args2 "github.com/wenlng/gonacli/content/args/argsync"
+	"github.com/wenlng/gonacli/content/args/argsync"
 	"github.com/wenlng/gonacli/tools"
 	"strings"
 )
 
 // 生成处理体
-func GenHandleReturnIntCode(method string, args []string, varType string) string {
+func GenHandleReturnIntCode(method string, args []string, varType string, endCode string) string {
 	code := ""
 
 	// 	int32 int64 uint32
@@ -20,6 +20,7 @@ func GenHandleReturnIntCode(method string, args []string, varType string) string
 		code = tools.FormatCodeIndentLn(`int wg_res_ = `+method+`(`+strings.Join(args, ",")+`);`, 2)
 	}
 
+	code += endCode
 	code += tools.FormatCodeIndentLn(`return Number::New(wg_env, wg_res_);`, 2)
 	return code
 }
@@ -34,10 +35,10 @@ func GenReturnIntTypeCode(export config.Export, varType string) string {
 Value _` + methodName + `(const CallbackInfo& wg_info) {`
 	code += tools.FormatCodeIndentLn(`Env wg_env = wg_info.Env();`, 2)
 
-	c, argNames, _ := args2.GenArgCode(args)
+	c, argNames, endCode := argsync.GenArgCode(args)
 	code += c
 
-	code += GenHandleReturnIntCode(methodName, argNames, varType)
+	code += GenHandleReturnIntCode(methodName, argNames, varType, endCode)
 
 	code += tools.FormatCodeIndentLn(`}`, 0)
 	return code

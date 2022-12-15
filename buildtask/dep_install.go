@@ -10,7 +10,7 @@ import (
 func installDep(cfgs config.Config) bool {
 	path := tools.FormatDirPath(cfgs.OutPut)
 
-	clog.Info("Staring install npm dependencies ...")
+	clog.Info("Staring install dependencies ...")
 	// "bindings" "node-addon-api"
 	msg, err := cmd.RunCommand(
 		"./",
@@ -22,6 +22,6 @@ func installDep(cfgs config.Config) bool {
 		return false
 	}
 	clog.Info(msg)
-	clog.Info("Install npm dependencies done ~")
+	clog.Info("Install dependencies done ~")
 	return true
 }
