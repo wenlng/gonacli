@@ -26,6 +26,7 @@ GONACLI 是一个快速使用 Golang 开发 NodeJS Addon 扩展的开发工具�
 
 - [https://github.com/wenlng/gonacli](https://github.com/wenlng/gonacli)
 
+- Gonacli QQ群(技术支持)：885267905
 
 ## Gonacli 的兼容支持
 - Linux
