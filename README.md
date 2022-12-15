@@ -15,7 +15,7 @@
 > English | [中文](README_zh.md)
 
 <p>
-GONACLI is a development tool that quickly uses Golang to develop NodeJS Addon. You only need to concentrate on the development of Golang, and you don't need to care about the implementation of the bridge layer. It supports JavaScript sync calls and async callbacks.
+<a href="https://github.com/wenlng/gonacli">GONACLI</a> is a development tool that quickly uses Golang to develop <b>NodeJS Addon</b>. You only need to concentrate on the development of Golang, and you don't need to care about the implementation of the bridge layer. It supports JavaScript sync calls and async callbacks.
 </p>
 
 <br/>
