@@ -30,6 +30,7 @@ func generateAddonBridge(cfgs config.Config) bool {
 
 	// 生成 addon c/c++ 代码
 	if g := content.GenCode(cfgs, cppName); !g {
+		//clog.Warning("Please check whether the \"goaddon\" configuration file is correct.")
 		return false
 	}
 

@@ -7,7 +7,6 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"github.com/wenlng/gonacli/clog"
 	"os/exec"
 )
 
@@ -19,9 +18,9 @@ func runCommand(path, name string, arg string, execStr string) (msg string, err 
 	cmd.Stderr = &stderr
 	cmd.Dir = path
 	err = cmd.Run()
-	clog.Info(cmd.Args)
+	//clog.Info(cmd.Args)
+	msg = fmt.Sprintf("%s", err) + ": " + fmt.Sprintf("%s", stderr.String())
 	if err != nil {
-		msg = fmt.Sprintf("%s", err) + ": " + fmt.Sprintf("%s", stderr.String())
 		err = errors.New(msg)
 	}
 	//log.Println(out.String())

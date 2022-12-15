@@ -17,6 +17,7 @@ func installDep(cfgs config.Config) bool {
 		"cd "+path+" && npm install bindings node-addon-api -S",
 	)
 	if err != nil {
+		//clog.Warning("Please check whether the \"npm\" command is executed correctly.")
 		clog.Error(err)
 		return false
 	}

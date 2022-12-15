@@ -51,6 +51,7 @@ func makeToAddon(cfgs config.Config, args string) bool {
 		"cd "+path+" && node-gyp configure && node-gyp build "+args,
 	)
 	if err != nil {
+		//clog.Warning("Please check whether the \"node-gyp\" command is executed correctly.")
 		clog.Error(err)
 		return false
 	}

@@ -44,6 +44,7 @@ func buildToDll(cfgs config.Config) bool {
 
 	// 生成dll
 	if d := buildDll(path, defFile, libFile, targetLibName, targetLibName2); !d {
+		clog.Warning("Please check whether the \"gcc\" command is executed correctly.")
 		return false
 	}
 
@@ -90,10 +91,17 @@ func buildToMSVCLib(cfgs config.Config, useVS bool, msvc32Vs bool) bool {
 	_ = tools.RemoveFiles(paths)
 
 	if useVS {
-		return buildMSVCLibWithVSTool(outputDir, defFile, targetLibName, libFile, msvc32Vs)
+		if s := buildMSVCLibWithVSTool(outputDir, defFile, targetLibName, libFile, msvc32Vs); !s {
+			//clog.Warning("Please check whether the \"lib.exe\" command exists.")
+			return false
+		}
 	}
 
-	return buildMSVCLibWithMinGWTool(outputDir, defFile, targetLibName, libFile)
+	if r := buildMSVCLibWithMinGWTool(outputDir, defFile, targetLibName, libFile); !r {
+		//clog.Warning("Please check whether the \"dlltool.exe\" command exists.")
+		return false
+	}
+	return true
 }
 
 func buildMSVCLibWithMinGWTool(rootPath string, defName string, dllName string, libName string) bool {
