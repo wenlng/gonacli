@@ -82,8 +82,6 @@ func RunBuildTask(config string, args string) {
 
 	// 生成 golang lib
 	if d := buildGoToLibrary(cfgs, args); !d {
-		clog.Warning("Please check whether the golang program code is correct.")
-		clog.Warning("Please check whether the \"gcc\" command is executed correctly.")
 		clog.Error("Fail build golang lib!")
 		return
 	}

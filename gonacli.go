@@ -6,7 +6,7 @@ import (
 
 const (
 	Name    = "goncali"
-	Version = "v1.0.9"
+	Version = "v1.0.10"
 )
 
 func main() {
