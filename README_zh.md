@@ -285,6 +285,10 @@ $ node ./test.js
       "returntype": "string",   // 返回给 JavaScript 的类型，没有 callback 类型
       "jscallname": "hello",    // JavaScript 调用的名称
       "jscallmode": "sync"      // sync 为同步执行、async 为异步执行（async值必须在args参数中指明 callback 类型参数）
+    },
+    {
+        name: "xxx",
+        ....
     }
   ]
 }

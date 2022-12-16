@@ -277,6 +277,10 @@ $ node ./test.js
       "returntype": "string",   // The type returned to JavaScript，has no callback type
       "jscallname": "hello",    // JavaScript call name
       "jscallmode": "sync"      // Sync is synchronous execution, and Async is asynchronous execution
+    },
+    {
+        name: "xxx",
+        ....
     }
   ]
 }
