@@ -80,7 +80,7 @@ $ gonacli version
 $ gcc -v
 ```
 
-<p>Window 环境下还需要安装 NodeJS Addon 编译工具 node-gyp 以及所依赖的构建工具</p>
+<p>Window 环境下还需要安装 NodeJS Addon 编译工具 node-gyp 所依赖的构建工具</p>
 
 ``` shell
 $ npm install --global node-gyp
