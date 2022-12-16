@@ -115,6 +115,9 @@ $ gonacli build --args '-ldflags "-s -w"'
 <p>Same as the "npm install"， Install NodeJS dependencies.</p>
 
 ``` shell
+# Install dependencies
+gonacli install
+
 # --config: Specify Profile
 $ gonacli install --config demoaddon.json
 ```
@@ -126,6 +129,8 @@ $ gonacli install --config demoaddon.json
 <p>2."lib.exe" of "Microsoft Visual c++ Build tools" or "Visual Studio"</p>
 
 ``` shell
+$ gonacli msvc
+
 # --vs: use VS "lib.exe", default is "dlltool.exe" of MinGW
 # --32x: Supports 32-bit OS，default 64.
 # --config: Specify Profile

@@ -122,6 +122,9 @@ $ gonacli build --args '-ldflags "-s -w"'
 <p>相当于 npm install 命令， 安装 NodeJS 需要的相关依赖</p>
 
 ``` shell
+# 安装依赖
+$ gonacli install
+
 # --config 参数指定配置文件
 $ gonacli install --config demoaddon.json
 ```
@@ -133,6 +136,9 @@ $ gonacli install --config demoaddon.json
 <p>2、"Microsoft Visual c++ Build tools" 或 "Visual Studio" 的 "lib.exe" 工具</p>
 
 ``` shell
+# 支持 windows 的msvc
+$ gonacli msvc
+
 # --vs 参数表示使用 VS 的 "lib.exe" 工具，默认是 MinGW 的 "dlltool.exe" 工具
 # --32x 参数表示支持 32 位的系统，默认 64 位
 # --config 参数指定配置文件
