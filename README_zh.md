@@ -80,7 +80,7 @@ $ gonacli version
 $ gcc -v
 ```
 
-<p>Window 环境下还需要安装 NodeJS Addon 编译工具 node-gyp 和所依赖的工具</p>
+<p>Window 环境下还需要安装 NodeJS Addon 编译工具 node-gyp 以及所依赖的构建工具</p>
 
 ``` shell
 $ npm install --global node-gyp
@@ -94,7 +94,7 @@ $ npm install --global --production windows-build-tools
 
 ### 1、generate
 
-<p>根据 goaddon 的配置生成对应 NodeJS Addon 相关的 Napi、C/C++ 桥接代码</p>
+<p>根据 goaddon 的配置生成对应 NodeJS Addon 相关的桥接代码</p>
 
 ``` shell
 # 默认将读取当前目录下的 goaddon.json 配置文件

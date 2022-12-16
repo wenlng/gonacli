@@ -75,7 +75,7 @@ $ gonacli version
 $ gcc -v
 ```
 
-<p>When compiling Node Addon in the Windows OS environment, you also need to install the tool that node-gyp and depends on.</p>
+<p>When compiling Node Addon in the Windows OS environment, you also need to install the build tool that node-gyp and depends on.</p>
 
 ``` shell
 $ npm install --global node-gyp
@@ -88,7 +88,7 @@ $ npm install --global --production windows-build-tools
 
 ### 1. generate
 
-Generate Napi, C/C++ bridge code related to NodeJS Addon according to the configuration of goaddon
+Generate bridge code related to NodeJS Addon according to the configuration of goaddon
 ``` shell
 # By default, it reads the goaddon in the current directory Json configuration file
 $ gonacli generate
