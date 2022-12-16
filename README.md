@@ -75,9 +75,11 @@ $ gonacli version
 $ gcc -v
 ```
 
-<p>When compiling Node Addon in the Windows OS environment, you also need to install the c/c++ compilation tool that node-gyp depends on.</p>
+<p>When compiling Node Addon in the Windows OS environment, you also need to install the c/c++ compilation tool that node-gyp and depends on.</p>
 
 ``` shell
+$ npm install --global node-gyp
+
 $ npm install --global --production windows-build-tools
 ```
 <br/>
