@@ -16,13 +16,11 @@
 
 <br/>
 
-<p>
 <a href="https://github.com/wenlng/gonacli">GONACLI</a> 是一个快速使用 Golang 开发 <b>NodeJS Addon</b> 扩展的开发工具，开发者只需要专注在 Golang 的开发，无需关心 NodeJS 与 Golang 的 Bridge 桥接层的实现，支持 JavaScript 同步调用和异步回调等。
-</p>
 
 
 <br/>
-<p> ⭐️ 如果能帮助到你，记得随手给点一个star。</p>
+⭐️ 如果能帮助到你，记得随手给点一个 star。
 
 - [https://github.com/wenlng/gonacli](https://github.com/wenlng/gonacli)
 
@@ -41,7 +39,7 @@
 - Go(1.14+)
 
 ## 使用 go 方式安装 gonacli 工具
-<p>安装前需要确保系统配置好了 GOPATH 及最终编译保存到 bin 目录的环境变量</p>
+安装前需要确保系统配置好了 `GOPATH` 及最终编译保存到 `bin` 目录的环境变量
 
 Linux or Mac OS
 ``` shell
@@ -74,13 +72,13 @@ $ gonacli version
 <br/>
 
 ## Windows 环境编译
-<p> 在 Windows 开发环境下需要安装 Go CGO 需要的 gcc/g++ 编译器，可以下载 "MinGW" 安装，配置好 MinGW/bin 的 PATH 环境变量即可，在命令行能够正常执行 gcc 。</p>
+在 Windows 开发环境下需要安装 Go CGO 需要的 `gcc/g++` 编译器，可以下载  `MinGW` 安装，配置好 `MinGW/bin` 的 `PATH` 环境变量即可，在命令行能够正常执行 `gcc` 。
 
 ``` shell
 $ gcc -v
 ```
 
-<p>Window 环境下还需要安装 NodeJS Addon 编译工具 node-gyp 所依赖的构建工具</p>
+Window 环境下还需要安装 `NodeJS Addon` 编译工具 `node-gyp` 所依赖的构建工具
 
 ``` shell
 $ npm install --global node-gyp
@@ -94,7 +92,7 @@ $ npm install --global --production windows-build-tools
 
 ### 1、generate
 
-<p>根据 goaddon 的配置生成对应 NodeJS Addon 相关的桥接代码</p>
+根据 `goaddon.json` 的配置生成对应 NodeJS Addon 相关的桥接代码
 
 ``` shell
 # 默认将读取当前目录下的 goaddon.json 配置文件
@@ -106,7 +104,7 @@ $ gonacli generate --config demoaddon.json
 
 ### 2、build
 
-<p>相当于 go build -buildmode=c-archive 命令，编译静态库</p>
+相当于 `go build -buildmode=c-archive` 命令，编译静态库
 
 ``` shell
 # 将 Go CGO 编译生成静态库
@@ -119,7 +117,7 @@ $ gonacli build --args '-ldflags "-s -w"'
 
 ### 3、install
 
-<p>相当于 npm install 命令， 安装 NodeJS 需要的相关依赖</p>
+相当于 `npm install` 命令， 安装 NodeJS 需要的相关依赖
 
 ``` shell
 # 安装依赖
@@ -131,9 +129,12 @@ $ gonacli install --config demoaddon.json
 
 ### 4、msvc
 
-<p>该命令只针对 window 环境下的兼容处理，需要 dlltool.exe 或 lib.exe (二选一)</p>
-<p>1、"MinGW" 支持 "dlltool.exe" 工具</p>
-<p>2、"Microsoft Visual c++ Build tools" 或 "Visual Studio" 的 "lib.exe" 工具</p>
+该命令只针对 window 环境下的兼容处理，需要 `dlltool.exe` 或 `lib.exe` (二选一)
+
+1、`MinGW` 支持 `dlltool.exe` 工具
+
+2、`Microsoft Visual c++ Build tools` 或 `Visual Studio` 的 `lib.exe` 工具
+
 
 ``` shell
 # 支持 windows 的msvc
@@ -146,9 +147,9 @@ $ gonacli msvc --config demoaddon.json
 ```
 
 ### 5、make
-<p>相当于 node-gyp configure && node-gyp build 命令，编译成最终的 NodeJS Addon 扩展</p>
+相当于 `node-gyp configure && node-gyp build` 命令，编译成最终的 NodeJS Addon 扩展
 
-<p>使用 make 命令请请确保系统已安装了 node-gyp 编译工具</p>
+使用 `make` 命令请请确保系统已安装了 `node-gyp` 编译工具
 
 ``` shell
 # 编译
@@ -163,7 +164,7 @@ $ gonacli make --args '--debug'
 
 ## 使用 Golang 快速开发 NodeJS Addon 的 Demo
 
-<p>Tip：请确保相关命令能正常使用，该 Demo 是在 Linux / Macos 环境下进行</p>
+Tip：请确保相关命令能正常使用，该 Demo 是在 Linux / Macos 环境下进行
 
 ``` shell
 # go
@@ -184,7 +185,7 @@ $ gcc -v
 
 
 #### 1、新建配置文件
-/goaddon.json
+`/goaddon.json`
 ``` json
 {
   "name": "demoaddon",
@@ -210,7 +211,7 @@ $ gcc -v
 ```
 
 #### 2、编写 Golang 代码
-/demoaddon.go
+`/demoaddon.go`
 ``` go
 package main
 import "C"
@@ -256,7 +257,7 @@ $ gonacli make
 ```
 
 #### 7、编写 js 测试文件
-/demoaddon/test.js
+`/demoaddon/test.js`
 ``` javascript
 const demoaddon = require('.')
 
@@ -320,22 +321,26 @@ $ node ./test.js
 |  callback   |   *C.char   |       -        |  Function   |
 
 ### 配置文件的 returntype 字段类型
-<p>returntype 字段没有 callback 类型</p>
+`returntype` 字段没有 `callback` 类型
 
 ### array 类型（当返回时存在多层时，在 returntype 中不推荐使用）
-<p>1、array 类型在 Golang 接收是字符串类型，需要配合使用 []interface{} 和 json.Unmarshal</p>
-<p>2、array 类型在 Golang 返回时是 *C.char 类型，配合使用 json.Marshal</p>
-<p>3、array 类型在 JavaScript 传递时是数组类型，但在接收时目前只支持一层，在 Golang 返回多层请使用字符串方式返回再使用 JavaScrpt 的 JSON.parse</p>
+1、`array` 类型在 Golang 接收是字符串类型，需要配合使用 `[]interface{}` 和 `json.Unmarshal`
+
+2、`array` 类型在 Golang 返回时是 `*C.char` 类型，配合使用 `json.Marshal`
+
+3、`array` 类型在 JavaScript 传递时是数组类型，但在接收时目前只支持一层，在 Golang 返回多层请使用字符串方式返回再使用 JavaScript 的 `JSON.parse`
 
 ### object 类型（当返回时存在多层时，在 returntype 中不推荐使用）
-<p>1、object 类型在 Golang 接收是字符串 *C.char 类型，需要配合使用 [string]interface{} 和 json.Unmarshal</p>
-<p>2、object 类型在 Golang 返回时是 *C.char 类型，配合使用 json.Marshal</p>
-<p>3、object 类型在 JavaScript 传递时是对象类型，但在接收时目前只支持一层，在 Golang 返回多层请使用字符串方式返回再使用 JavaScrpt 的 JSON.parse</p>
+1、`object` 类型在 Golang 接收是字符串 `*C.char` 类型，需要配合使用 `[string]interface{}` 和 `json.Unmarshal`
+
+2、`object` 类型在 Golang 返回时是 `*C.char` 类型，配合使用 `json.Marshal`
+
+3、`object` 类型在 JavaScript 传递时是对象类型，但在接收时目前只支持一层，在 Golang 返回多层请使用字符串方式返回再使用 JavaScript 的 `JSON.parse`
 
 <br/>
 
 ## JavaScript 同步式调用
-/goaddon.json
+`/goaddon.json`
 ``` json
 {
   "name": "demoaddon",
@@ -361,7 +366,7 @@ $ node ./test.js
 ```
 
 #### 2、编写 Golang 代码
-/demoaddon.go
+`/demoaddon.go`
 ``` go
 package main
 import "C"
@@ -391,7 +396,7 @@ func Hello(_name *C.char) *C.char {
 ```
 
 #### 3. Test
-/test.js
+`/test.js`
 ``` javascript
 const demoaddon = require('./demoaddon')
 
@@ -403,7 +408,7 @@ console.log('>>> ', res)
 <br/>
 
 ## JavaScript 异步式回调
-/goaddon.json
+`/goaddon.json`
 ``` json
 {
   "name": "demoaddon",
@@ -433,7 +438,7 @@ console.log('>>> ', res)
 ```
 
 #### 2、编写 Golang 代码
-/demoaddon.go
+`/demoaddon.go`
 ``` go
 package main
 import "C"
@@ -463,7 +468,7 @@ func Hello(_name *C.char, cbsFnName *C.char) *C.char {
 ```
 
 #### 3. Test
-/test.js
+`/test.js`
 ``` javascript
 const demoaddon = require('./demoaddon')
 

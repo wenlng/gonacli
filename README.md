@@ -14,13 +14,12 @@
 
 > English | [中文](README_zh.md)
 
-<p>
+
 <a href="https://github.com/wenlng/gonacli">GONACLI</a> is a development tool that quickly uses Golang to develop <b>NodeJS Addon</b>. You only need to concentrate on the development of Golang, and you don't need to care about the implementation of the bridge layer. It supports JavaScript sync calls and async callbacks.
-</p>
 
 <br/>
 
-<p> ⭐️ If it helps you, please give a star.</p>
+ ⭐️ If it helps you, please give a star.
 
 - [https://github.com/wenlng/gonacli](https://github.com/wenlng/gonacli)
 
@@ -69,13 +68,13 @@ $ gonacli version
 
 
 ## Compilation Of Windows OS Environment
-<p> In the Windows OS environment, you need to install the "gcc/g++" compiler support required by Go CGO, download the MinGW installation, configure the PATH environment variable of "MinGW/bin", and execute "gcc" normally on the command line.</p>
+In the Windows OS environment, you need to install the `gcc/g++` compiler support required by Go CGO, download the `MinGW` installation, configure the `PATH` environment variable of `MinGW/bin`, and execute `gcc` normally on the command line.
 
 ``` shell
 $ gcc -v
 ```
 
-<p>When compiling Node Addon in the Windows OS environment, you also need to install the build tool that node-gyp and depends on.</p>
+When compiling Node Addon in the Windows OS environment, you also need to install the build tool that `node-gyp` and depends on.
 
 ``` shell
 $ npm install --global node-gyp
@@ -89,6 +88,7 @@ $ npm install --global --production windows-build-tools
 ### 1. generate
 
 Generate bridge code related to NodeJS Addon according to the configuration of goaddon
+
 ``` shell
 # By default, it reads the goaddon in the current directory Json configuration file
 $ gonacli generate
@@ -99,7 +99,7 @@ $ gonacli generate --config demoaddon.json
 
 ### 2. build
 
-<p>Same as the "go build - buildmode=c-archive" command, compile the library</p>
+Same as the `go build - buildmode=c-archive` command, compile the library
 
 ``` shell
 # Compile to generate library
@@ -112,7 +112,7 @@ $ gonacli build --args '-ldflags "-s -w"'
 
 ### 3. install
 
-<p>Same as the "npm install"， Install NodeJS dependencies.</p>
+Same as the `npm install`， Install NodeJS dependencies.
 
 ``` shell
 # Install dependencies
@@ -124,9 +124,11 @@ $ gonacli install --config demoaddon.json
 
 ### 4. msvc
 
-<p>Select "dlltool.exe" in the Windows OS environment or "lib.exe"</p>
-<p>1."dlltool.exe" of "MinGW"</p>
-<p>2."lib.exe" of "Microsoft Visual c++ Build tools" or "Visual Studio"</p>
+Select `dlltool.exe` in the Windows OS environment or `lib.exe`
+
+1.`dlltool.exe` of `MinGW`
+
+2.`lib.exe` of `Microsoft Visual c++ Build tools` or `Visual Studio`
 
 ``` shell
 $ gonacli msvc
@@ -139,7 +141,7 @@ $ gonacli msvc --config demoaddon.json
 
 ### 5. make
 
-<p>Same as the "node-gyp configure && node-gyp build" command，Compile NodeJS Addon</p>
+Same as the `node-gyp configure && node-gyp build` command，Compile NodeJS Addon
 
 ``` text
 Please ensure that the node gyp compiler has been installed on the system before using the "make" command
@@ -155,7 +157,8 @@ $ gonacli make --args '--debug'
 <br/>
 
 ## Use Golang to develop an Demo of NodeJS Addon
-<p>Tip：Ensure that relevant commands can be used normally, This is an demo under Linux/OS environment.</p>
+
+Tip：Ensure that relevant commands can be used normally, This is an demo under Linux/OS environment.
 
 ``` shell
 # go
@@ -173,7 +176,9 @@ $ node-gyp -v
 
 
 #### 1. Create Goaddon Configure File
-/goaddon.json
+
+`/goaddon.json`
+
 ``` json
 {
   "name": "demoaddon",
@@ -199,7 +204,9 @@ $ node-gyp -v
 ```
 
 #### 2. Write Golang Code
-/demoaddon.go
+
+`/demoaddon.go`
+
 ``` go
 package main
 import "C"
@@ -247,7 +254,9 @@ $ gonacli make
 ```
 
 #### 7. Create JS Test File
-/demoaddon/test.js
+
+`/demoaddon/test.js`
+
 ``` javascript
 const demoaddon = require('.')
 
@@ -310,24 +319,37 @@ $ node ./test.js
 |  callback   |   *C.char   |       -        |  Function   |
 
 ### The returntype field type of the configuration file
-<p>The returntype field has no callback type</p>
+The `returntype` field has no callback type
 
 ### array type
-<p>When there are multiple levels when returning, it is not recommended to use in the returntype</p>
-<p>1. The "array" type received in Golang is a string "*C.Char" type, which needs to be use "[]interface{}" and "json.Unmarshal"</p>
-<p>2. The "array" type is when Golang returns "*C.Char" type, use "json.Marshal"</p>
-<p>3. The "array" type is an Array type when JavaScript is passed, but currently only supports one layer when receiving. Please use string method to return multiple layers in Golang, and then use JavaScript's "JSON.parse"</p>
+When there are multiple levels when returning, it is not recommended to use in the `returntype`
+
+
+1. The `array` type received in Golang is a string `*C.Char` type, which needs to be use `[]interface{}` and `json.Unmarshal`
+
+
+2. The `array` type is when Golang returns `*C.Char` type, use `json.Marshal`
+
+
+3. The `array` type is an Array type when JavaScript is passed, but currently only supports one layer when receiving. Please use string method to return multiple layers in Golang, and then use JavaScript's `JSON.parse`
 
 ### object type
-<p>When there are multiple levels when returning, it is not recommended to use in the returntype</p>
-<p>1. The "object" type received in Golang is a string type. You need to use "[string]interface{}" and "json.Unmarshal"</p>
-<p>2. 2. The "object" type is when Golang returns "*C.Char" type, use "json.Marshal"</p>
-<p>3. The "object" type is an Object type when JavaScript is passed, but currently only supports one layer when receiving. Please use string method to return multiple layers in Golang, and then use JavaScript's "JSON.parse"</p>
+When there are multiple levels when returning, it is not recommended to use in the `returntype`
+
+1. The `object` type received in Golang is a string type. You need to use `[string]interface{}` and `json.Unmarshal`
+
+
+2. The `object` type is when Golang returns `*C.Char` type, use `json.Marshal`
+
+
+3. The `object` type is an Object type when JavaScript is passed, but currently only supports one layer when receiving. Please use string method to return multiple layers in Golang, and then use JavaScript's `JSON.parse`
 
 <br/>
 
 ## JavaScript Sync Call
-/goaddon.json
+
+`/goaddon.json`
+
 ``` json
 {
   "name": "demoaddon",
@@ -353,7 +375,9 @@ $ node ./test.js
 ```
 
 #### 2. Golang Code
-/demoaddon.go
+
+`/demoaddon.go`
+
 ``` go
 package main
 import "C"
@@ -382,7 +406,9 @@ func Hello(_name *C.char) *C.char {
 ```
 
 #### 3. Test
-/test.js
+
+`/test.js`
+
 ``` javascript
 const demoaddon = require('./demoaddon')
 
@@ -394,7 +420,9 @@ console.log('>>> ', res)
 <br/>
 
 ## JavaScript Async Call
-/goaddon.json
+
+`/goaddon.json`
+
 ``` json
 {
   "name": "demoaddon",
@@ -424,7 +452,9 @@ console.log('>>> ', res)
 ```
 
 #### 2. Golang Code
-/demoaddon.go
+
+`/demoaddon.go`
+
 ``` go
 package main
 import "C"
@@ -453,7 +483,9 @@ func Hello(_name *C.char, cbsFnName *C.char) *C.char {
 ```
 
 #### 3. Test
-/test.js
+
+`/test.js`
+
 ``` javascript
 const demoaddon = require('./demoaddon')
 
