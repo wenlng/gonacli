@@ -1038,7 +1038,7 @@ static void wg_execute_workasynccallbackrecount(napi_env wg_env, void* wg_data) 
   char * s = new char[wg_sInfo->len];
   strcpy(s, (char *)wg_sInfo->value);
   // ---- 
-  // arg - cb
+  // arg - cb995
   WgAddonArgInfo * wg_cbInfo = wg_addon->args[1];
   char * cb = new char[wg_cbInfo->len];
   strcpy(cb, (char *)wg_cbInfo->value);
