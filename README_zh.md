@@ -1,7 +1,7 @@
 <div align="center">
 <img width="120" style="padding-top: 50px" src="http://47.104.180.148/gonacli/gonacli_logo.svg"/>
 <h1 style="margin: 0; padding: 0">GonaCli</h1>
-<p>一个快速使用 Golang 编写和构建生成 NodeJS Addon 扩展的开发工具</p>
+<p>快速使用 Golang 编写和构建生成 NodeJS Addon 扩展的开发工具</p>
 <a href="https://goreportcard.com/report/github.com/wenlng/gonacli"><img src="https://goreportcard.com/badge/github.com/wenlng/gonacli"/></a>
 <a href="https://godoc.org/github.com/wenlng/gonacli"><img src="https://godoc.org/github.com/wenlng/gonacli?status.svg"/></a>
 <a href="https://github.com/wenlng/gonacli/releases"><img src="https://img.shields.io/github/v/release/wenlng/gonacli.svg"/></a>
@@ -16,7 +16,7 @@
 
 <br/>
 
-<a href="https://github.com/wenlng/gonacli">GONACLI</a> 是一个快速使用 Golang 开发 <b>NodeJS Addon</b> 扩展的开发工具，开发者只需要专注在 Golang 的开发，无需关心 与 NodeJS 桥接层 NAPI 的 C/C++ 实现，支持 JavaScript 同步调用和异步回调等；主要广泛应用的场景如 Electron 桌面端系列软件等。
+<a href="https://github.com/wenlng/gonacli">GONACLI</a> 是快速使用 Golang 开发 <b>NodeJS Addon</b> 扩展的开发工具，开发者只需要专注在 Golang 的开发，无需关心 与 NodeJS 桥接层 NAPI 的 C/C++ 实现，支持 JavaScript 同步调用和异步回调等；主要广泛应用的场景如 Electron 桌面端系列软件等。
 
 
 <br/>
@@ -480,7 +480,7 @@ demoaddon.hello(name, funciton(res){
 
 <br/>
 
-> 请作者喝咖啡：[http://witkeycode.com/sponsor](http://witkeycode.com/sponsor)
+> 请作者喝咖啡：[http://wencodes.com/sponsor](http://wencodes.com/sponsor)
 
 <br/>
 
